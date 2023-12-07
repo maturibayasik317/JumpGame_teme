@@ -25,12 +25,12 @@ public class PlayerTest : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    /*private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("HitBox"))
         {
             Destroy(gameObject);
             Debug.Log("ゲームオーバー");
         }
-    }
+    }*/
 }

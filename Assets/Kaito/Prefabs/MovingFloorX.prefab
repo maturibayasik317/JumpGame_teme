@@ -193,4 +193,5 @@ MonoBehaviour:
   rb: {fileID: 4207978640509910155}
   surfaceEffector: {fileID: 6898107750609064195}
   xRange: 5
-  speed: 50
+  speed: 1
+  otherSpeed: 50

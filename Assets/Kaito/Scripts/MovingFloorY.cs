@@ -10,7 +10,8 @@ public class MovingFloorY : MonoBehaviour
     [SerializeField] SurfaceEffector2D surfaceEffector;
 
     [SerializeField] float yRange; // Y軸方向の移動範囲
-    [SerializeField] float speed; // 移動速度？
+    [SerializeField] float speed; // 移動速度
+    [SerializeField] float otherSpeed; // 上に乗っているオブジェクトのスピードに関係
 
     // 計算用
     Vector2 defaultPos;
@@ -24,15 +25,16 @@ public class MovingFloorY : MonoBehaviour
     void FixedUpdate()
     {
         prevPos = rb.position;
+        float t = Time.time * speed;
 
-        // Y座標のみ横移動（Mathf.PingPongの数値部分（yRange）変更で移動距離が変わる）
-        Vector2 pos = new Vector2(defaultPos.x, defaultPos.y + Mathf.PingPong(Time.time, yRange));
+        // X座標のみ横移動 : Mathf.PingPongは「t」で移動速度、「yRange」で移動距離
+        Vector2 pos = new Vector2(defaultPos.x, defaultPos.y + Mathf.PingPong(t, yRange));
         rb.MovePosition(pos);
 
         // 速度を逆算する
-        Vector2 velocity = (pos - prevPos) / Time.deltaTime * speed;
+        Vector2 velocity = (pos - prevPos) / Time.deltaTime * otherSpeed;
 
-        // 速度のY成分をSurfaceEffector2Dに適用
+        // 速度のY成分をSurfaceEffector2Dに適用（上に乗っているオブジェクトのスピードにプラスされる）
         surfaceEffector.speed = velocity.y;
     }
 }

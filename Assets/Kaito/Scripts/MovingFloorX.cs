@@ -10,7 +10,8 @@ public class MovingFloorX : MonoBehaviour
     [SerializeField] SurfaceEffector2D surfaceEffector;
 
     [SerializeField] float xRange; // X軸方向の移動範囲
-    [SerializeField] float speed; // 移動速度？
+    [SerializeField] float speed; // 移動速度
+    [SerializeField] float otherSpeed; // 上に乗っているオブジェクトのスピードに関係
 
     // 計算用
     Vector2 defaultPos;
@@ -24,15 +25,16 @@ public class MovingFloorX : MonoBehaviour
     void FixedUpdate()
     {
         prevPos = rb.position;
+        float t = Time.time * speed;
 
-        // X座標のみ横移動（Mathf.PingPongの数値部分（xRange）変更で移動距離が変わる）
-        Vector2 pos = new Vector2(defaultPos.x + Mathf.PingPong(Time.time, xRange), defaultPos.y);
+        // X座標のみ横移動 : Mathf.PingPongは「t」で移動速度、「xRange」で移動距離
+        Vector2 pos = new Vector2(defaultPos.x + Mathf.PingPong(t, xRange), defaultPos.y);
         rb.MovePosition(pos);
 
         // 速度を逆算する
-        Vector2 velocity = (pos - prevPos) / Time.deltaTime * speed;
+        Vector2 velocity = (pos - prevPos) / Time.deltaTime * otherSpeed;
 
-        // 速度のX成分をSurfaceEffector2Dに適用
+        // 速度のX成分をSurfaceEffector2Dに適用（上に乗っているオブジェクトのスピードにプラスされる）
         surfaceEffector.speed = velocity.x;
     }
 }
