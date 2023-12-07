@@ -16,14 +16,8 @@ public class PlayerTest : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.AddForce(new Vector2(speed, 0) * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.AddForce(new Vector2(-speed, 0) * Time.deltaTime);
-        }
+        transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("jump");
