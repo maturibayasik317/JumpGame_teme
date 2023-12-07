@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Jump_Dash : MonoBehaviour
-{
+{   //プレイヤーにコンポーネントしてください
     private Vector2 velocity;
     [SerializeField] float Jump_Power;//ジャンプ力
     private int Jump_Count =1;
@@ -12,11 +13,31 @@ public class Jump_Dash : MonoBehaviour
     Rigidbody2D rigid2D;
     [SerializeField] ContactFilter2D filter2D;
 
+    bool dash = false;
+
+
     public GameObject text;
+
+    void MoveDash()
+    {
+        //ここをelseにしてif(ジャンプ中にスペースを押すとって感じに書き直す)
+        if(Input.GetKey(KeyCode.Space)) 
+        { 
+            transform.position+=  new Vector3(0.1f,0,0);
+        }
+        dash = false;
+    }
+
+    void MoveNormal()
+    {
+        if( Input.GetKeyDown(KeyCode.Space))
+            dash = true;
+    }
 
     private void Update()
     {
-        if ( JumpCount < Jump_Count && Input.GetKey(KeyCode.Space))
+        //スペースでジャンプ
+        if ( JumpCount < Jump_Count && Input.GetKeyDown (KeyCode.Space))
         {
             jump = true;
         }
@@ -30,6 +51,14 @@ public class Jump_Dash : MonoBehaviour
             JumpCount++;
 
             jump = false;
+        }
+        if (dash)//ダッシュ移動
+        {
+            MoveDash();
+        }
+        else//通常状態
+        {
+            MoveNormal();
         }
         if (GetComponent<Rigidbody2D>().IsTouching(filter2D))
         {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Scroll : MonoBehaviour
 {
+    //”wŒi‚Æ‚©‚Ì“®‚©‚µ‚½‚¢‚à‚Ì‚É“ü‚ê‚Ä‚­‚¾‚³‚¢
     [SerializeField] private float speed;
 
     void Update()
