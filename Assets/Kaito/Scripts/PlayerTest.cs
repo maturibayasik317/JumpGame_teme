@@ -24,4 +24,13 @@ public class PlayerTest : MonoBehaviour
             rb.AddForce(Vector2.up * jumpForce);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("HitBox"))
+        {
+            Destroy(gameObject);
+            Debug.Log("ゲームオーバー");
+        }
+    }
 }
