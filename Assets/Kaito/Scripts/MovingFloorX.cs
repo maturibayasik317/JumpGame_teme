@@ -19,12 +19,12 @@ public class MovingFloorX : MonoBehaviour
 
     void Start()
     {
-        defaultPos = transform.position;
+        defaultPos = transform.position; // 初期位置取得
     }
 
     void FixedUpdate()
     {
-        prevPos = rb.position;
+        prevPos = rb.position; // 現在位置取得
         float t = Time.time * speed;
 
         // X座標のみ横移動 : Mathf.PingPongは「t」で移動速度、「xRange」で移動距離
