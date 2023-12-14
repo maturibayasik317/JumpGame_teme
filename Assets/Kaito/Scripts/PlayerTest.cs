@@ -9,6 +9,8 @@ public class PlayerTest : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float jumpForce;
 
+    [HideInInspector] public bool isDash = false;
+
     void Start()
     {
         
@@ -16,7 +18,18 @@ public class PlayerTest : MonoBehaviour
 
     void Update()
     {
-        transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
+        //transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
+            isDash = true;
+        }
+        else
+        {
+            isDash = false;
+        }
+
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
