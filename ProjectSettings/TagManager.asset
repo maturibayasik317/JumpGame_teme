@@ -7,6 +7,7 @@ TagManager:
   - HitBox
   - Enemy
   - GR
+  - Ground
   layers:
   - Default
   - TransparentFX
