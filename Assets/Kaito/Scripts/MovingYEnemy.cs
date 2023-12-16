@@ -5,16 +5,15 @@ using UnityEngine;
 //----Y軸方向に往復する敵----
 public class Enemy : MonoBehaviour
 {
-    // 空のオブジェクトで管理しているため、オブジェクトの中心位置が映らないといけない
-    // 最初にnullにしておかないと、画面外でも勝手に動いてしまう
-    SpriteRenderer sr = null;
-
     [SerializeField] float yRange; // 移動範囲
     [SerializeField] float speed; // 移動速度
 
-    Vector2 startPos;
+    // 空のオブジェクトで管理しているため、オブジェクトの中心位置が映らないといけない
+    // 最初にnullにしておかないと、画面外でも勝手に動いてしまう
+    SpriteRenderer sr = null;
     bool isView = false;
-    
+    Vector2 startPos;
+
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
