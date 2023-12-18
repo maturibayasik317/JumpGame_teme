@@ -6,6 +6,7 @@ using UnityEngine;
 public class DashEffect : MonoBehaviour
 {
     [SerializeField] ParticleSystem particle;
+    [SerializeField] GameObject player;
 
     PlayerTest playerScript;
 
@@ -16,7 +17,12 @@ public class DashEffect : MonoBehaviour
 
     void Update()
     {
-        if (playerScript.isDash)
+        StartCoroutine("DashParticle");
+    }
+
+    IEnumerator DashParticle()
+    {
+        if (playerScript.GetIsDash)
         {
             particle.Play();
             Debug.Log("particle_Start");
@@ -25,5 +31,7 @@ public class DashEffect : MonoBehaviour
         {
             particle.Stop();
         }
+        
+        yield return null;
     }
 }

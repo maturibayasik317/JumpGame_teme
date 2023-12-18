@@ -9,7 +9,10 @@ public class PlayerTest : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float jumpForce;
 
-    [HideInInspector] public bool isDash = false;
+    bool isDash = false;
+
+    // 読み取り専用プロパティ
+    public bool GetIsDash => isDash;
 
     void Start()
     {
