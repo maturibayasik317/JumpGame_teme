@@ -9,10 +9,10 @@ public class PlayerTest : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float jumpForce;
 
-    bool isDash = false;
+    bool dash = false;
 
     // 読み取り専用プロパティ
-    public bool GetIsDash => isDash;
+    public bool GetDash => dash;
 
     void Start()
     {
@@ -26,11 +26,11 @@ public class PlayerTest : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
-            isDash = true;
+            dash = true;
         }
         else
         {
-            isDash = false;
+            dash = false;
         }
 
 

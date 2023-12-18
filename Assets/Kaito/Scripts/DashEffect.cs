@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//----ダッシュ時のみ起こる風のエフェクト----
+//----ダッシュ時のエフェクト----
 public class DashEffect : MonoBehaviour
 {
     [SerializeField] ParticleSystem particle;
-    [SerializeField] GameObject player;
 
-    PlayerTest playerScript;
+    [SerializeField] float duration; // パーティクルの持続時間
+
+    PlayerTest playerScript; // playerのダッシュ状態を取得用
 
     void Start()
     {
@@ -17,21 +18,20 @@ public class DashEffect : MonoBehaviour
 
     void Update()
     {
-        StartCoroutine("DashParticle");
+        StartCoroutine("DashParticle", duration);
     }
 
-    IEnumerator DashParticle()
+    // パーティクルの処理
+    IEnumerator DashParticle(float duration)
     {
-        if (playerScript.GetIsDash)
+        if (playerScript.GetDash)
         {
             particle.Play();
-            Debug.Log("particle_Start");
-        }
-        else
-        {
+            
+            yield return new WaitForSeconds(duration);
+            
+            // duration秒後にエフェクトをストップ
             particle.Stop();
         }
-        
-        yield return null;
     }
 }
