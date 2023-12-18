@@ -13,7 +13,6 @@ public class Jump_Dash : MonoBehaviour
     private bool isground;
     Rigidbody2D rigid2D;
     [SerializeField] ContactFilter2D filter2D;
-
     bool dash = false;
 
 
@@ -21,7 +20,6 @@ public class Jump_Dash : MonoBehaviour
 
     void MoveDash()
     {
-        //ここをelseにしてif(ジャンプ中にスペースを押すとって感じに書き直す)
         dash = true;
         transform.position += new Vector3(3f, 0, 0);
     }
@@ -74,7 +72,7 @@ public class Jump_Dash : MonoBehaviour
             //IwasaのところにPrefabとしてゲームオーバーテキストお用意したのでInspecterに入れてください
             text.SetActive(true);
         }
-        if (other.gameObject.tag == "GR")
+        if (other.gameObject.tag == "Ground")
         {
             isground = true;
             dash = false;
