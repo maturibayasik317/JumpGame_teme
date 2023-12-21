@@ -15,6 +15,8 @@ public class Jump_Dash : MonoBehaviour
     [SerializeField] ContactFilter2D filter2D;
     bool dash = false;
 
+    public bool GetDash => dash;
+
 
     public GameObject text;
 
@@ -22,6 +24,7 @@ public class Jump_Dash : MonoBehaviour
     {
         dash = true;
         transform.position += new Vector3(3f, 0, 0);
+        Debug.Log ("‰¡ˆÚ“®");
     }
 
 
@@ -50,6 +53,7 @@ public class Jump_Dash : MonoBehaviour
 
             jump = false;
             isground = false;
+            Debug.Log("ƒWƒƒƒ“ƒv");
         }
 
         if (GetComponent<Rigidbody2D>().IsTouching(filter2D))
@@ -58,7 +62,6 @@ public class Jump_Dash : MonoBehaviour
             JumpCount = 1;
         }
         Jump_Count = Mathf.Max(0, Jump_Count);
-        Debug.Log(Jump_Count);
     }
 
     private void OnCollisionEnter2D(Collision2D other)

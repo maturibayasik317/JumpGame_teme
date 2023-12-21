@@ -5,6 +5,7 @@ using UnityEngine;
 public class CamerContorller : MonoBehaviour
 {
     //カメラにaddしてください
+    //addしたらプレイヤーの下に入れてください
     float y = 0.0f;
     // Start is called before the first frame update
     void Start()
