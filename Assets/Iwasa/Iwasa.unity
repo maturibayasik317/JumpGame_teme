@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 259108156}
   - component: {fileID: 259108158}
   - component: {fileID: 259108159}
-  - component: {fileID: 259108160}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Ground
@@ -298,7 +297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Jump_Power: 500
   Jump_Count: 1
-  Dash_Distance: 0
+  Dash_Distance: 300
   filter2D:
     useTriggers: 0
     useLayerMask: 0
@@ -314,18 +313,6 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   text: {fileID: 7595939253488191584, guid: f1e504a643aab0246b602d379ce9baa4, type: 3}
---- !u!114 &259108160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259108152}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3ce8319057ae224bbf7c0d816cad68b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &356148140 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9182087140291863806, guid: 584be764231092a4b871e66c4d1a3b45, type: 3}
