@@ -9,11 +9,11 @@ public class DashEffect : MonoBehaviour
 
     [SerializeField] float duration; // パーティクルの持続時間
 
-    PlayerTest playerScript; // playerのダッシュ状態を取得用
+    Jump_Dash playerScript; // playerのダッシュ状態を取得用
 
     void Start()
     {
-        playerScript = GameObject.Find("Player").GetComponent<PlayerTest>();
+        playerScript = GameObject.Find("Player").GetComponent<Jump_Dash>();
     }
 
     void Update()
