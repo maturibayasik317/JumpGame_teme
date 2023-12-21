@@ -24,6 +24,8 @@ public class Jump_Dash : MonoBehaviour
     {
         dash = true;
         /*transform.position += new Vector3(3f, 0, 0);*/
+        Rigidbody2D rd = GetComponent<Rigidbody2D>();
+        rd.bodyType = RigidbodyType2D.Kinematic;
         this.rigid2D.AddForce(transform.right * Dash_Distance);
         Debug.Log ("横移動");
     }
@@ -68,7 +70,7 @@ public class Jump_Dash : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         //HitBoxもしくはEnemyに触れるとプレイヤーの破壊
-        if(other.gameObject.tag == "HitBox || Enemy ")
+        if(other.gameObject.tag == "HitBox" || other.gameObject.tag == "Enemy ")
         {
             //プレイヤーを消去
             Destroy(this.gameObject);
