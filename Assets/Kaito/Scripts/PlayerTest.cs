@@ -23,6 +23,8 @@ public class PlayerTest : MonoBehaviour
     {
         //transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
 
+        
+
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
@@ -32,7 +34,6 @@ public class PlayerTest : MonoBehaviour
         {
             dash = false;
         }
-
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //----ダッシュ時のエフェクト----
+// パーティクルシステムのインスペクター上の「duration」から
+// 持続時間を設定
 public class DashEffect : MonoBehaviour
 {
     [SerializeField] ParticleSystem particle;
-
-    [SerializeField] float duration; // パーティクルの持続時間
 
     Jump_Dash playerScript; // playerのダッシュ状態を取得用
 
@@ -18,19 +18,19 @@ public class DashEffect : MonoBehaviour
 
     void Update()
     {
-        StartCoroutine("DashParticle", duration);
+        StartCoroutine(DashParticle());
     }
 
     // パーティクルの処理
-    IEnumerator DashParticle(float duration)
+    IEnumerator DashParticle()
     {
         if (playerScript.GetDash)
         {
             particle.Play();
             
-            yield return new WaitForSeconds(duration);
+            yield return new WaitForSeconds(particle.main.duration);
             
-            // duration秒後にエフェクトをストップ
+            // duration秒後くらいにエフェクトをストップ
             particle.Stop();
         }
     }
