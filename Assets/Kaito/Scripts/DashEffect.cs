@@ -9,11 +9,11 @@ public class DashEffect : MonoBehaviour
 {
     [SerializeField] ParticleSystem particle;
 
-    Jump_Dash playerScript; // playerのダッシュ状態を取得用
+    PlayerTest playerScript; // playerのダッシュ状態を取得用
 
     void Start()
     {
-        playerScript = GameObject.Find("Player").GetComponent<Jump_Dash>();
+        playerScript = GameObject.Find("Player").GetComponent<PlayerTest>();
     }
 
     void Update()
