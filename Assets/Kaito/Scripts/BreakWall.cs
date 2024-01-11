@@ -9,11 +9,11 @@ public class BreakWall : MonoBehaviour
 {
     [SerializeField] ParticleSystem particle;
     [SerializeField] Collider2D _collider;
-    PlayerTest playerScript;
+    Jump_Dash playerScript;
 
     void Start()
     {
-        playerScript = GameObject.Find("Player").GetComponent<PlayerTest>();
+        playerScript = GameObject.Find("Player").GetComponent<Jump_Dash>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
