@@ -22,8 +22,8 @@ public class Jump_Dash : MonoBehaviour
     [SerializeField] float Dash_Distance;//ダッシュ距離10~20ぐらいがオススメ
     [SerializeField] float Jump_Power;//ジャンプ力500ぐらいがオススメ
     [SerializeField] private int Jump_Count = 1;//ジャンプ可能回数
-    [SerializeField] float Fall_Duration = 0.0f; // 落下開始からの持続時間
-    [SerializeField] float FallSpeed = 0.0f;//落下速度
+    [SerializeField] float Fall_Duration = 2.0f; // 落下開始からの持続時間
+    [SerializeField] float FallSpeed = 0.1f;//落下速度
 
     void MoveDash()//ジャンプ中にSpeace押した時のダッシュ処理
     {
@@ -36,7 +36,7 @@ public class Jump_Dash : MonoBehaviour
         Debug.Log ("横移動");
     }
 
-    //ここを直せ
+    //ここを直せ ダッシュ処理を停止させろ ダッシュ中はｙからの重力なくせ
     void Fall()
     {
         //ダッシュ中は落下しない
@@ -64,7 +64,7 @@ public class Jump_Dash : MonoBehaviour
             MoveDash();
         }
 
-        if (dash && dashElapsedTime > 0.2f)
+        if (dash && dashElapsedTime > 0.5f)
         {
             dash = false;
             fall = true;
@@ -90,7 +90,7 @@ public class Jump_Dash : MonoBehaviour
         }
         Jump_Count = Mathf.Max(0, Jump_Count);
 
-        // 追加: ジャンプ中かつダッシュ中でない場合にのみ落下処理
+        // ジャンプ中かつダッシュ中でない場合にのみ落下処理
         if (!dash && !isground && !fall)
         {
             fallElapsedTime += Time.deltaTime;
