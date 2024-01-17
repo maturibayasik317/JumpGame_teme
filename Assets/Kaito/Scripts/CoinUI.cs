@@ -6,7 +6,9 @@ using UnityEngine.UI;
 //----獲得したコインの数を表示するUI----
 public class CoinUI : MonoBehaviour
 {
-    [SerializeField] GameObject[] coinArr; // 配置するコイン
+    [SerializeField] GameObject[] stageCoin; // ステージ上に配置するコイン
+    [SerializeField] GameObject[] uiCoin; // UIとして表示するコイン
+    [SerializeField] Sprite coinSprite; // コイン取得後の画像
     // 獲得したコイン数を表示するテキスト
     [SerializeField] Text coinNumText;
 
@@ -15,12 +17,17 @@ public class CoinUI : MonoBehaviour
     void Start()
     {
         playerCoinScript = GameObject.Find("Player").GetComponent<PlayerGetCoin>();
+        
     }
 
     void Update()
     {
-        coinNumText.text = $"Coin：{playerCoinScript.GetPlayerCoin}／{coinArr.Length}";
-    }
+        // 獲得したコイン数 / ステージに配置したコイン数
+        coinNumText.text = $"Coin：{playerCoinScript.GetPlayerCoin}／{stageCoin.Length}";
 
-    
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            
+        }
+    }
 }
