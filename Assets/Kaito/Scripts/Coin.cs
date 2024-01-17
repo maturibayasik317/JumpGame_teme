@@ -7,13 +7,12 @@ public class Coin : MonoBehaviour
 {
     [SerializeField] float angle; // ‰½“x‚¸‚Â‰ñ“]‚³‚¹‚é‚©
     [SerializeField] ParticleSystem particle;
-
+    
     Vector3 axis = Vector3.up; // ‰ñ“]Ž²
 
     void Start()
     {
         particle.Play();
-        
     }
 
     void Update()
