@@ -31,7 +31,8 @@ public class Jump_Dash : MonoBehaviour
         dashElapsedTime = 0.0f;
         fallElapsedTime = 0.0f; // ダッシュが始まったので落下経過時間をリセット
 
-        rigid2D.velocity = new Vector2(Dash_Distance, 0);
+        rigid2D.velocity = new Vector2(Dash_Distance / 0.5f, 0); // Dash_Distance / 0.5f はダッシュにかかる時間を示しています
+
 
         Debug.Log ("横移動");
     }
@@ -39,12 +40,8 @@ public class Jump_Dash : MonoBehaviour
     //ここを直せ ダッシュ処理を停止させろ ダッシュ中はｙからの重力なくせ
     void Fall()
     {
-        //ダッシュ中は落下しない
-        if (!dash)
-        {
-            transform.Translate(Vector3.down * FallSpeed * Time.deltaTime);
-            Debug.Log("落下");
-        }
+        rigid2D.velocity = new Vector2(0, -FallSpeed);
+        Debug.Log("落下");
     }
 
     void MoveNormal()
