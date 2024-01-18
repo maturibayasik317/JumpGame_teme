@@ -23,39 +23,44 @@ public class MovingFloor : MonoBehaviour
 
     void Start()
     {
-        defaultPos = transform.position; // 初期位置取得
+        defaultPos = transform.localPosition; // 初期位置取得
     }
 
     void FixedUpdate()
     {
         if (sr.isVisible) // 画面内なら
         {
-            elapsedTime += Time.deltaTime;
-
+            elapsedTime += Time.deltaTime; // 経過時間
+            
             // x軸方向に移動
             if (xAxis)
             {
-                transform.position += new Vector3(speed, 0) * Time.deltaTime;
+                // 速度
+                Vector3 velocity = new Vector3(speed, 0) * Time.deltaTime;
+                transform.localPosition += velocity;
 
                 if (elapsedTime >= moveTime)
                 {
                     // 逆方向に移動
-                    transform.position += new Vector3(-speed, 0) * Time.deltaTime;
+                    speed *= -1;
                     elapsedTime = 0;
                 }
-
+                //Vector2 otherVelocity = (velocity - 現在位置)
                 // 速度のX成分をSurfaceEffector2Dに適用（上に乗っているオブジェクトのスピードにプラスされる）
-                // surfaceEffector.speed = velocity.x;
+                surfaceEffector.speed = velocity.x;
             }
+
             // y軸方向に移動
-            else if (yAxis)
+            if (yAxis)
             {
-                transform.position += new Vector3(0, speed) * Time.deltaTime;
+                // 速度
+                Vector3 velocity = new Vector3(0, speed) * Time.deltaTime;
+                transform.localPosition += velocity;
 
                 if (elapsedTime >= moveTime)
                 {
                     // 逆方向に移動
-                    transform.position += new Vector3(0, -speed) * Time.deltaTime;
+                    speed *= -1;
                     elapsedTime = 0;
                 }
 

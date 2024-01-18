@@ -865,7 +865,7 @@ Transform:
   m_GameObject: {fileID: 1633709737}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11, y: 6, z: 0}
+  m_LocalPosition: {x: -4.66, y: 12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -948,7 +948,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 6
+  m_Constraints: 4
 --- !u!1 &1793062534
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,6 +1132,7 @@ GameObject:
   - component: {fileID: 5175524223699926260}
   - component: {fileID: 8669381953669474678}
   - component: {fileID: 3167688258730564593}
+  - component: {fileID: 8669381953669474679}
   m_Layer: 0
   m_Name: MovingFloor
   m_TagString: Untagged
@@ -1527,7 +1528,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 215985906154557725, guid: 91da8fe308daf2947a5480c9e449835d, type: 3}
       propertyPath: m_Name
-      value: Canvas
+      value: UICanvas
       objectReference: {fileID: 0}
     - target: {fileID: 1056391527579689412, guid: 91da8fe308daf2947a5480c9e449835d, type: 3}
       propertyPath: m_Pivot.x
@@ -1789,6 +1790,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &8669381953669474679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802679056115232268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0efac566cb5d246805d3109b902bb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surfaceEffector: {fileID: 3167688258730564593}
+  sr: {fileID: 5175524223699926260}
+  xAxis: 1
+  yAxis: 0
+  moveTime: 2
+  speed: 2
+  otherSpeed: 50
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
