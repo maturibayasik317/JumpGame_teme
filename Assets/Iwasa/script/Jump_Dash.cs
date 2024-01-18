@@ -31,16 +31,24 @@ public class Jump_Dash : MonoBehaviour
         dashElapsedTime = 0.0f;
         fallElapsedTime = 0.0f; // ダッシュが始まったので落下経過時間をリセット
 
-        rigid2D.velocity = new Vector2(Dash_Distance / 0.5f, 0); // Dash_Distance / 0.5f はダッシュにかかる時間を示しています
-
+        //rigid2D.velocity = new Vector2(Dash_Distance / 0.5f, 0); // Dash_Distance / 0.5f はダッシュにかかる時間を示しています
+        if (!isground)
+        {
+            rigid2D.velocity = new Vector2(Dash_Distance / 0.5f, rigid2D.velocity.y); // Dash_Distance / 0.5f はダッシュにかかる時間を示しています
+        }
+        else
+        {
+            rigid2D.velocity = new Vector2(Dash_Distance / 0.5f, 0);
+        }
 
         Debug.Log ("横移動");
     }
 
-    //ここを直せ ダッシュ処理を停止させろ ダッシュ中はｙからの重力なくせ
+    //落下処理
     void Fall()
     {
-        rigid2D.velocity = new Vector2(0, -FallSpeed);
+        //rigid2D.velocity = new Vector2(0, -FallSpeed);
+        rigid2D.velocity = new Vector2(rigid2D.velocity.x, -FallSpeed);
         Debug.Log("落下");
     }
 
@@ -49,7 +57,10 @@ public class Jump_Dash : MonoBehaviour
         if( Input.GetKeyDown(KeyCode.Space))
             dash = true;
     }
-
+    private void Awake()
+    {
+        this.rigid2D = GetComponent<Rigidbody2D>();
+    }
     private void Update()
     {
         dashElapsedTime += Time.deltaTime; // フレームごとに経過時間を更新
@@ -69,7 +80,7 @@ public class Jump_Dash : MonoBehaviour
 
         if (jump)
         { 
-            this.rigid2D = GetComponent<Rigidbody2D>();
+            
             rigid2D.velocity = Vector2.zero;
 
             //ジャンプさせる
@@ -103,6 +114,8 @@ public class Jump_Dash : MonoBehaviour
             Debug.Log("落下");
         }
 
+        EndGame();
+
     }
 
 
@@ -125,9 +138,17 @@ public class Jump_Dash : MonoBehaviour
             dash = false;
             fall = false;
             // 地面に着地したら落下経過時間をリセット
-            fallElapsedTime = 0.0f; 
+            fallElapsedTime = 0.0f;
             //地面に着地したらダッシュを停止
-             rigid2D.velocity = new Vector2(0, rigid2D.velocity.y);
+            rigid2D.velocity = new Vector2(0, rigid2D.velocity.y);
+        }
+    }
+
+    private void EndGame()
+    {
+        if(Input.GetKey(KeyCode.Exclaim))
+        {
+            
         }
     }
 }

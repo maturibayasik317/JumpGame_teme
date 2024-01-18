@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db422d2637944784ab33c4057e506ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 11
+  speed: 2
 --- !u!4 &55135102
 Transform:
   m_ObjectHideFlags: 0
@@ -425,7 +425,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -436,7 +436,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 5
+  m_Constraints: 0
 --- !u!70 &259464267
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -552,9 +552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0391d2c11b97e114ea66c4564aff70a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Jump_Power: 1250
-  Jump_Count: 1
-  Dash_Distance: 0
+  text: {fileID: 128243294}
   filter2D:
     useTriggers: 0
     useLayerMask: 0
@@ -569,7 +567,11 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  text: {fileID: 128243294}
+  Dash_Distance: 10
+  Jump_Power: 1250
+  Jump_Count: 1
+  Fall_Duration: 2
+  FallSpeed: 10
 --- !u!1001 &343854779
 PrefabInstance:
   m_ObjectHideFlags: 0
