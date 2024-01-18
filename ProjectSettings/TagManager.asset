@@ -9,6 +9,7 @@ TagManager:
   - GR
   - Ground
   - Coin
+  - ClearLine
   layers:
   - Default
   - TransparentFX
