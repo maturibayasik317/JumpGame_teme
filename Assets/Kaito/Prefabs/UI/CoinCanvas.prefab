@@ -129,6 +129,7 @@ MonoBehaviour:
   - {fileID: 7007234454850516546}
   - {fileID: 5146179829955009987}
   coinNumText: {fileID: 4947590116283008982}
+  coinPrefabs: {fileID: 1356922986846728647, guid: 6d6e445e6a2eaf4479e03717818ca634, type: 3}
 --- !u!1 &1027103758685214436
 GameObject:
   m_ObjectHideFlags: 0
