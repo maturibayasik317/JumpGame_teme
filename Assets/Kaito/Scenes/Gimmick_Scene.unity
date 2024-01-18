@@ -720,7 +720,6 @@ GameObject:
   - component: {fileID: 1633709740}
   - component: {fileID: 1633709742}
   - component: {fileID: 1633709743}
-  - component: {fileID: 1633709744}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -873,18 +872,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
---- !u!114 &1633709744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1633709737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd9021e92cf058642ba14d6f2adf5996, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1793062534
 GameObject:
   m_ObjectHideFlags: 0
@@ -1441,6 +1428,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3220890666758517977, guid: 91da8fe308daf2947a5480c9e449835d, type: 3}
+      propertyPath: coinPrefabs
+      value: 
+      objectReference: {fileID: 1356922986846728647, guid: 6d6e445e6a2eaf4479e03717818ca634, type: 3}
     - target: {fileID: 3220890666758517977, guid: 91da8fe308daf2947a5480c9e449835d, type: 3}
       propertyPath: stageCoins.Array.data[0]
       value: 

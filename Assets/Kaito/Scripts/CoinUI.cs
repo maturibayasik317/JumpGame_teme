@@ -14,17 +14,18 @@ public class CoinUI : MonoBehaviour
     // 獲得したコイン数を表示するテキスト
     [SerializeField] Text coinNumText;
 
-    PlayerGetCoin playerCoinScript;
+    [SerializeField] GameObject coinPrefabs;
+    Coin coinScript;
 
     void Start()
     {
-        playerCoinScript = GameObject.Find("Player").GetComponent<PlayerGetCoin>();
+        coinScript = coinPrefabs.GetComponent<Coin>();
     }
 
     void Update()
     {
         // 獲得したコイン数 / ステージに配置したコイン数
-        coinNumText.text = $"Coin：{playerCoinScript.GetPlayerCoin}／{stageCoins.Length}";
+        coinNumText.text = $"Coin：{coinScript.GetPlayerCoin}／{stageCoins.Length}";
         ChangeSprite();
     }
 
