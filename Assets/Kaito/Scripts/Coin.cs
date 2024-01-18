@@ -10,6 +10,10 @@ public class Coin : MonoBehaviour
     
     Vector3 axis = Vector3.up; // 回転軸
 
+    // プレイヤーが取得したコイン数
+    static int getCoin = 0;
+    public int GetPlayerCoin => getCoin;
+
     void Start()
     {
         particle.Play();
@@ -25,6 +29,7 @@ public class Coin : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             particle.Stop();
+            getCoin += 1;
             Destroy(gameObject);
         }
     }
