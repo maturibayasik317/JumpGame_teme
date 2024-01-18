@@ -13,6 +13,8 @@ public class Jump_Dash : MonoBehaviour
     bool fall = false;
     public bool GetDash => dash;
     public GameObject text;
+    bool isClear = false;
+    public bool GetIsClear => isClear;
 
     Rigidbody2D rigid2D;
     [SerializeField] ContactFilter2D filter2D;
@@ -27,19 +29,12 @@ public class Jump_Dash : MonoBehaviour
 
     void MoveDash()//ジャンプ中にSpeace押した時のダッシュ処理
     {
+
         dash = true;
         dashElapsedTime = 0.0f;
         fallElapsedTime = 0.0f; // ダッシュが始まったので落下経過時間をリセット
 
-        //rigid2D.velocity = new Vector2(Dash_Distance / 0.5f, 0); // Dash_Distance / 0.5f はダッシュにかかる時間を示しています
-        if (!isground)
-        {
-            rigid2D.velocity = new Vector2(Dash_Distance / 0.5f, rigid2D.velocity.y); // Dash_Distance / 0.5f はダッシュにかかる時間を示しています
-        }
-        else
-        {
-            rigid2D.velocity = new Vector2(Dash_Distance / 0.5f, 0);
-        }
+        rigid2D.velocity = new Vector2(Dash_Distance / 0.5f, 0); // Dash_Distance / 0.5f はダッシュにかかる時間を示しています
 
         Debug.Log ("横移動");
     }
@@ -118,6 +113,13 @@ public class Jump_Dash : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("ClearLine"))
+        {
+            isClear = true;
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
