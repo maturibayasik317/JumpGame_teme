@@ -79,10 +79,10 @@ public class UI : MonoBehaviour
             retryButton.SetActive(true);
             gameOverImage.SetActive(true);
         }
-        /*if (playerScript.GetIsClear)
+        if (playerScript.GetIsClear)
         {
             retryButton.SetActive(true);
             gameClearImage.SetActive(true);
-        }*/
+        }
     }
 }
