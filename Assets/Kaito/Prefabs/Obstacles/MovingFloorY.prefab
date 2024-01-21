@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6504206824165334368}
   m_Layer: 0
   m_Name: MovingFloorY
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -192,6 +192,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3886363788549178760}
   surfaceEffector: {fileID: 1773029737887330607}
+  sr: {fileID: 1008076134279771391}
   yRange: 5
   speed: 1
-  otherSpeed: 50

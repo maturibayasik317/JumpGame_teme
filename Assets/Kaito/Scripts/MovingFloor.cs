@@ -14,8 +14,10 @@ public class MovingFloor : MonoBehaviour
 
     [SerializeField] float moveTime; // 一方向への移動時間
     [SerializeField] float speed; // 移動速度
+    [SerializeField] float otherSpeed;
 
     Vector2 prevPos;
+    Vector2 playerPos;
     float elapsedTime = 0; // 時間計測用
 
     void FixedUpdate()
@@ -37,6 +39,7 @@ public class MovingFloor : MonoBehaviour
             // 速度
             Vector2 velocity = new Vector2(speed, 0) * Time.deltaTime;
             transform.localPosition += (Vector3)velocity;
+            prevPos = transform.position;
 
             if (elapsedTime >= moveTime)
             {
@@ -44,7 +47,7 @@ public class MovingFloor : MonoBehaviour
                 speed *= -1;
                 elapsedTime = 0;
             }
-            Vector2 otherVelocity = (velocity - prevPos) / Time.deltaTime;
+            Vector2 otherVelocity = (velocity - prevPos);
             // 速度のX成分をSurfaceEffector2Dに適用（上に乗っているオブジェクトのスピードにプラスされる）
             surfaceEffector.speed = otherVelocity.x;
         }
