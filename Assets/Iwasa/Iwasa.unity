@@ -204,7 +204,7 @@ Transform:
   m_GameObject: {fileID: 259108152}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -100, y: 2, z: 0}
+  m_LocalPosition: {x: -250, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0391d2c11b97e114ea66c4564aff70a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 7595939253488191584, guid: f1e504a643aab0246b602d379ce9baa4, type: 3}
+  text: {fileID: 2686330284226548245, guid: 9294f0581facd0143bd8918a78b350e0, type: 3}
   filter2D:
     useTriggers: 0
     useLayerMask: 0
@@ -310,7 +310,7 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  Dash_Distance: 20
+  Dash_Distance: 10
   Jump_Power: 500
   Jump_Count: 1
   Fall_Duration: 2
@@ -352,7 +352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4118838015050756809, guid: 584be764231092a4b871e66c4d1a3b45, type: 3}
       propertyPath: m_LocalScale.x
-      value: 200
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4118838015050756809, guid: 584be764231092a4b871e66c4d1a3b45, type: 3}
       propertyPath: m_LocalScale.y
@@ -504,7 +504,7 @@ Transform:
   m_GameObject: {fileID: 785045651}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.84, y: -0.9900001, z: -10}
+  m_LocalPosition: {x: 3, y: -0.9900001, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
