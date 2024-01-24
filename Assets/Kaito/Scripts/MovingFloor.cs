@@ -5,7 +5,6 @@ using UnityEngine;
 //----動く床（修正中）----
 public class MovingFloor : MonoBehaviour
 {
-    [SerializeField] SurfaceEffector2D surfaceEffector;
     [SerializeField] SpriteRenderer sr;
 
     // 動く軸を設定（インスペクター上でチェックを入れる）
@@ -14,11 +13,18 @@ public class MovingFloor : MonoBehaviour
 
     [SerializeField] float moveTime; // 一方向への移動時間
     [SerializeField] float speed; // 移動速度
-    [SerializeField] float otherSpeed;
 
-    Vector2 prevPos;
-    Vector2 playerPos;
+    Vector2 oldPos; // 直前の位置を取得
+    Vector2 playerVelocity; // プレイヤーに加算する速度
     float elapsedTime = 0; // 時間計測用
+
+    // 読み取り専用プロパティ
+    public Vector2 GetVelocity => playerVelocity;
+
+    void Start()
+    {
+        oldPos = transform.position;
+    }
 
     void FixedUpdate()
     {
@@ -39,7 +45,6 @@ public class MovingFloor : MonoBehaviour
             // 速度
             Vector2 velocity = new Vector2(speed, 0) * Time.deltaTime;
             transform.localPosition += (Vector3)velocity;
-            prevPos = transform.position;
 
             if (elapsedTime >= moveTime)
             {
@@ -47,9 +52,10 @@ public class MovingFloor : MonoBehaviour
                 speed *= -1;
                 elapsedTime = 0;
             }
-            Vector2 otherVelocity = (velocity - prevPos);
-            // 速度のX成分をSurfaceEffector2Dに適用（上に乗っているオブジェクトのスピードにプラスされる）
-            surfaceEffector.speed = otherVelocity.x;
+
+            // 進んだ距離を出し、時間で割る
+            playerVelocity.x = (velocity.x - oldPos.x) / Time.deltaTime;
+            oldPos.x = transform.position.x; // 直前の床の位置を保存
         }
 
         // y軸方向に移動
@@ -65,8 +71,9 @@ public class MovingFloor : MonoBehaviour
                 speed *= -1;
                 elapsedTime = 0;
             }
-            // y軸で動く際はオブジェクトは横移動させない
-            surfaceEffector.speed = 0;
+
+            playerVelocity.y = (velocity.y - oldPos.y) / Time.deltaTime;
+            oldPos.y = transform.position.y;
         }
     }
 }
