@@ -43,7 +43,7 @@ public class Jump_Dash : MonoBehaviour
     void Fall()
     {
         //rigid2D.velocity = new Vector2(0, -FallSpeed);
-        rigid2D.velocity = new Vector2(rigid2D.velocity.x, -FallSpeed);
+        rigid2D.velocity = new Vector2(0, -FallSpeed);
         Debug.Log("—Ž‰º");
     }
 
@@ -63,8 +63,8 @@ public class Jump_Dash : MonoBehaviour
         if (Input.GetKeyDown (KeyCode.Space))
         {
             if(isground == true) jump = true;
-            else if(isground == false&& dash == false) 
-            MoveDash();
+            else if (!isground && !dash)
+                MoveDash();
         }
 
         if (dash && dashElapsedTime > 0.5f)
