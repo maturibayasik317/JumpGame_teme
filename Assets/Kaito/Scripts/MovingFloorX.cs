@@ -36,12 +36,12 @@ public class MovingFloorX : MonoBehaviour
     // 動きの処理
     void Move()
     {
-        prevPos = transform.position; // 現在位置取得
+        prevPos = rb.position; // 現在位置取得。「rb.position」は物理計算が入らない移動
         float t = Time.time * speed;
 
         // X座標のみ横移動 : Mathf.PingPongは「t」で移動速度、「xRange」で移動距離
         Vector2 pos = new Vector2(defaultPos.x + Mathf.PingPong(t, xRange), defaultPos.y);
-        rb.MovePosition(pos);
+        rb.MovePosition(pos); // 「rb.MovePosition」は物理計算が入る移動
 
         // 速度を逆算する
         Vector2 velocity = (pos - prevPos) / Time.deltaTime * 50;
