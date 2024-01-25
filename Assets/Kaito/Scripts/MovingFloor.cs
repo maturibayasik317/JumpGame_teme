@@ -14,8 +14,9 @@ public class MovingFloor : MonoBehaviour
     [SerializeField] float moveTime; // 一方向への移動時間
     [SerializeField] float speed; // 移動速度
 
-    Vector2 oldPos; // 直前の位置を取得
-    Vector2 playerVelocity; // プレイヤーに加算する速度
+    Vector2 oldPos = Vector2.zero; // 直前の位置を取得
+    Vector2 velocity = Vector2.zero;
+    Vector2 playerVelocity = Vector2.zero; // プレイヤーに加算する速度
     float elapsedTime = 0; // 時間計測用
 
     // 読み取り専用プロパティ
@@ -43,7 +44,7 @@ public class MovingFloor : MonoBehaviour
         if (xAxis)
         {
             // 速度
-            Vector2 velocity = new Vector2(speed, 0) * Time.deltaTime;
+            velocity.x = speed * Time.deltaTime;
             transform.localPosition += (Vector3)velocity;
 
             if (elapsedTime >= moveTime)
@@ -54,17 +55,17 @@ public class MovingFloor : MonoBehaviour
             }
 
             // 進んだ距離を出し、時間で割る
-            playerVelocity.x = (velocity.x - oldPos.x) / Time.deltaTime;
-            oldPos.x = transform.position.x; // 直前の床の位置を保存
+            playerVelocity.x = (transform.localPosition.x - oldPos.x) / Time.deltaTime;
+            oldPos.x = transform.localPosition.x; // 直前の床の位置を保存
         }
 
         // y軸方向に移動
         if (yAxis)
         {
             // 速度
-            Vector2 velocity = new Vector2(0, speed) * Time.deltaTime;
+            velocity.y = speed * Time.deltaTime;
             transform.localPosition += (Vector3)velocity;
-
+            
             if (elapsedTime >= moveTime)
             {
                 // 逆方向に移動
@@ -72,8 +73,8 @@ public class MovingFloor : MonoBehaviour
                 elapsedTime = 0;
             }
 
-            playerVelocity.y = (velocity.y - oldPos.y) / Time.deltaTime;
-            oldPos.y = transform.position.y;
+            playerVelocity.y = (transform.localPosition.y - oldPos.y) / Time.deltaTime;
+            oldPos.y = transform.localPosition.y;
         }
     }
 }
