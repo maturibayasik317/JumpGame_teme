@@ -87,7 +87,7 @@ public class PlayerTest : MonoBehaviour
             // x成分とy成分をそれぞれ取得
             addVelocity = new Vector2(floorSprict.GetVelocity.x, floorSprict.GetVelocity.y);
             
-            // 動く床の上でジャンプ入力したとき
+            // 動く床の上でジャンプ入力していないとき
             if (!jumpDuring)
             {
                 rigid2D.velocity = new Vector2(0, 0) + addVelocity;
