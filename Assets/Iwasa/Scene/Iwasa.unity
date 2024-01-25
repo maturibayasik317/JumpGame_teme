@@ -310,11 +310,12 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  Dash_Distance: 20
-  Jump_Power: 500
+  Dash_Distance: 10
+  Jump_Power: 2000
   Jump_Count: 1
   Fall_Duration: 2
-  FallSpeed: 20
+  FallSpeed: 10
+  DefaultGravityScale: 9
 --- !u!1 &356148140 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9182087140291863806, guid: 584be764231092a4b871e66c4d1a3b45, type: 3}
