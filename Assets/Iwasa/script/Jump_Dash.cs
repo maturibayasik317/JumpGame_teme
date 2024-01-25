@@ -26,6 +26,7 @@ public class Jump_Dash : MonoBehaviour
     [SerializeField] private int Jump_Count = 1;//ジャンプ可能回数
     [SerializeField] float Fall_Duration = 2.0f; // 落下開始からの持続時間
     [SerializeField] float FallSpeed = 0.1f;//落下速度
+    [SerializeField] float DefaultGravityScale = 10.0f;
 
     void MoveDash()//ジャンプ中にSpeace押した時のダッシュ処理
     {
@@ -35,6 +36,7 @@ public class Jump_Dash : MonoBehaviour
         fallElapsedTime = 0.0f; // ダッシュが始まったので落下経過時間をリセット
 
         rigid2D.velocity = new Vector2(Dash_Distance / 0.5f, 0); // Dash_Distance / 0.5f はダッシュにかかる時間を示しています
+        rigid2D.gravityScale = 0.0f;
 
         Debug.Log ("横移動");
     }
@@ -43,7 +45,7 @@ public class Jump_Dash : MonoBehaviour
     void Fall()
     {
         //rigid2D.velocity = new Vector2(0, -FallSpeed);
-        rigid2D.velocity = new Vector2(0, -FallSpeed);
+        rigid2D.gravityScale = DefaultGravityScale;
         Debug.Log("落下");
     }
 
@@ -55,6 +57,7 @@ public class Jump_Dash : MonoBehaviour
     private void Awake()
     {
         this.rigid2D = GetComponent<Rigidbody2D>();
+        rigid2D.gravityScale = DefaultGravityScale;
     }
     private void Update()
     {
