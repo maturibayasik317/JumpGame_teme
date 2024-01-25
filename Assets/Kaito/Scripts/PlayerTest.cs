@@ -5,7 +5,7 @@ using UnityEngine;
 //----ギミックのテスト用----
 public class PlayerTest : MonoBehaviour
 {
-    [SerializeField] Rigidbody2D rb;
+    [SerializeField] Rigidbody2D rigid2D;
     [SerializeField] float speed;
     [SerializeField] float jumpPower;
     float xSpeed;
@@ -14,35 +14,56 @@ public class PlayerTest : MonoBehaviour
     // 出来るかどうか
     bool dash = false;
     bool jump = false;
-    bool fall = false;
+
+// 動く床の速度加算用の変数
 
     // rb.velocity用
-    Vector2 jumpForce;
-    Vector2 fallForce;
+    Vector2 jumpVec = Vector2.zero;
+    // 加算する移動速度
+    Vector2 addVelocity = Vector2.zero;
 
+    bool onMoveFloor = false; // 動く床の上かどうか
     bool jumpDuring = false; // ジャンプ中かどうか
-    bool fallDuring = false;
 
     MovingFloor floorSprict = null; // 動く床のスクリプト
+
+//
+
+    bool isground = false;
+    bool fall = false;
+    float fallElapsedTime;
 
     // 読み取り専用プロパティ
     public bool GetDash => dash;
 
-    void Start()
+    void Update()
     {
-        
-    }
-
-    private void Update()
-    {
+        if (isground)
+        {
+            jump = true;
+        }
+        // ジャンプ処理
         if (jump && Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("jump");
-//
+
+// ジャンプ処理部分に追記（変更）
+
             jumpDuring = true;
-            // 保存
-            jumpForce = Vector2.up * jumpPower;
-            rb.AddForce(jumpForce);
+            // (AddForceの中身)を変数「jumpVec」として保存
+            jumpVec = transform.up * jumpPower;
+            // 引数を保存した変数に変更
+            if (onMoveFloor)
+            {
+                rigid2D.AddForce(jumpVec + addVelocity);
+            }
+            else
+            {
+                rigid2D.AddForce(jumpVec);
+            }
+//
+            jump = false;
+            isground = false;
         }
     }
 
@@ -57,9 +78,8 @@ public class PlayerTest : MonoBehaviour
         {
             dash = false;
         }
-
-        Vector2 addVelocity = Vector2.zero; // 加算する移動速度
         
+// Update()の最後に追記
 
         // 動く床が参照されているとき
         if (floorSprict != null)
@@ -67,41 +87,55 @@ public class PlayerTest : MonoBehaviour
             // x成分とy成分をそれぞれ取得
             addVelocity = new Vector2(floorSprict.GetVelocity.x, floorSprict.GetVelocity.y);
             
-            // ジャンプ、落下状態をそれぞれ参照
-
-            if (jumpDuring) // ジャンプ中はジャンプ力も参照させる
+            // 動く床の上でジャンプ入力したとき
+            if (!jumpDuring)
             {
-                rb.velocity = new Vector2(0, jumpForce.y) + addVelocity;
-            }
-/*            else if (fallDuring) // 落下時
-            {
-                rb.velocity = new Vector2(0, fallForce.y) + addVelocity;
-            }
-*/
-            else // 通常時
-            {
-                rb.velocity = new Vector2(0, 0) + addVelocity;
+                rigid2D.velocity = new Vector2(0, 0) + addVelocity;
             }
         }
+//
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // 動く床に乗っているとき
-        if (collision.gameObject.CompareTag("MoveFloor"))
-        {
-            floorSprict = collision.gameObject.GetComponent<MovingFloor>();
-        }
+        //// 動く床に乗っているとき
+        //if (collision.gameObject.CompareTag("MoveFloor"))
+        //{
+        //    floorSprict = collision.gameObject.GetComponent<MovingFloor>();
+        //}
 
-        // ジャンプできる
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("MoveFloor"))
+        //// ジャンプできる
+        //if (collision.gameObject.CompareTag("Ground"))
+        //{
+        //    jump = true;
+        //}
+
+// ジャンプ判定部分に追記
+
+        //ジャンプのオンオフについて使用
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "MoveFloor")
         {
-           jump = true;
+            isground = true;
+            dash = false;
+            fall = false;
+
+            // 追記
+            jumpDuring = false;
+            
+            // 地面に着地したら落下経過時間をリセット
+            fallElapsedTime = 0.0f;
+            //地面に着地したらダッシュを停止
+            rigid2D.velocity = new Vector2(0, rigid2D.velocity.y);
+
+            if (collision.gameObject.tag == "MoveFloor")
+            {
+                Debug.Log("床に乗った");
+                // 動く床のスクリプト取得
+                floorSprict = collision.gameObject.GetComponent<MovingFloor>();
+                onMoveFloor = true;
+            }
         }
-        else
-        {
-            jump = false;
-        }
+        //
 
         if (collision.gameObject.CompareTag("HitBox"))
         {
@@ -110,15 +144,19 @@ public class PlayerTest : MonoBehaviour
         }
     }
 
+
+//
     void OnCollisionExit2D(Collision2D collision)
     {
         // 動く床に乗っていないとき
         if (collision.gameObject.CompareTag("MoveFloor"))
         {
+            Debug.Log("床から離れた");
             floorSprict = null;
+            onMoveFloor = false;
         }
     }
-
+//
 
     void OnTriggerEnter2D(Collider2D collision)
     {
