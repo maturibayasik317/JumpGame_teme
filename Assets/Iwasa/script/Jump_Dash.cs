@@ -27,6 +27,12 @@ public class Jump_Dash : MonoBehaviour
     [SerializeField] float Fall_Duration = 2.0f; // 落下開始からの持続時間
     [SerializeField] float FallSpeed = 0.1f;//落下速度
     [SerializeField] float DefaultGravityScale = 10.0f;
+    //動く床の速度加速用
+    Vector2 jumpVec = Vector2.zero;
+    Vector2 addVelocity = Vector2.zero;
+    bool onMoveFloor = false;//動く床かどうか
+    bool jumpDuring = false;//ジャンプ中かどうか
+    MovingFloor floorScript = null;
 
     void MoveDash()//ジャンプ中にSpeace押した時のダッシュ処理
     {
@@ -78,11 +84,19 @@ public class Jump_Dash : MonoBehaviour
 
         if (jump)
         { 
-            
+            jumpDuring = true;
             rigid2D.velocity = Vector2.zero;
-
+            jumpVec =transform.up * Jump_Power;//引数を保存した変数に変更
             //ジャンプさせる
             this.rigid2D.AddForce(transform.up * Jump_Power);
+            if(onMoveFloor)
+            {
+                rigid2D.AddForce(jumpVec + addVelocity);
+            } 
+            else
+            {
+                rigid2D.AddForce(jumpVec);
+            }
 
             jump = false;
             isground = false;
@@ -112,6 +126,17 @@ public class Jump_Dash : MonoBehaviour
             Debug.Log("落下");
         }
 
+        //動く床が参照されている時
+        if(floorScript != null)
+        {
+            addVelocity = new Vector2(floorScript.GetVelocity.x, floorScript.GetVelocity.y);
+            //動く床の上でジャンプしてないとき
+            if(!jumpDuring)
+            {
+                rigid2D.velocity =new Vector2(0,0) + addVelocity;
+            }
+        }
+
         EndGame();
 
     }
@@ -137,15 +162,32 @@ public class Jump_Dash : MonoBehaviour
         }
 
         //ジャンプのオンオフについて使用
-        if (other.gameObject.tag == "Ground")
+        if (other.gameObject.tag == "Ground" || collision.gameObject.tag == "MoveFloor")
         {
             isground = true;
             dash = false;
             fall = false;
+            jumpDuring = false;
             // 地面に着地したら落下経過時間をリセット
             fallElapsedTime = 0.0f;
             //地面に着地したらダッシュを停止
             rigid2D.velocity = new Vector2(0, rigid2D.velocity.y);
+
+            if(collision.gameObject.tag == "MovweFloor") 
+            {
+                floorScript = collision.gameObject.GetComponent<MovingFloor>();
+                onMoveFloor = true;
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision) 
+    {
+        if(collision.gameObject.CompareTag("MoveFloor"))
+        {
+            Debug.Log("床から離れた");
+            floorScript = null;
+            onMoveFloor = false;
         }
     }
 
