@@ -45,7 +45,7 @@ public class MovingFloor : MonoBehaviour
         {
             // 速度
             velocity.x = speed * Time.deltaTime;
-            transform.localPosition += (Vector3)velocity;
+            transform.position += (Vector3)velocity;
 
             if (elapsedTime >= moveTime)
             {
@@ -55,8 +55,8 @@ public class MovingFloor : MonoBehaviour
             }
 
             // 進んだ距離を出し、時間で割る
-            playerVelocity.x = (transform.localPosition.x - oldPos.x) / Time.deltaTime;
-            oldPos.x = transform.localPosition.x; // 直前の床の位置を保存
+            playerVelocity.x = (transform.position.x - oldPos.x) / Time.deltaTime;
+            oldPos.x = transform.position.x; // 直前の床の位置を保存
         }
 
         // y軸方向に移動
@@ -64,7 +64,7 @@ public class MovingFloor : MonoBehaviour
         {
             // 速度
             velocity.y = speed * Time.deltaTime;
-            transform.localPosition += (Vector3)velocity;
+            transform.position += (Vector3)velocity;
             
             if (elapsedTime >= moveTime)
             {
@@ -73,8 +73,8 @@ public class MovingFloor : MonoBehaviour
                 elapsedTime = 0;
             }
 
-            playerVelocity.y = (transform.localPosition.y - oldPos.y) / Time.deltaTime;
-            oldPos.y = transform.localPosition.y;
+            playerVelocity.y = (transform.position.y - oldPos.y) / Time.deltaTime;
+            oldPos.y = transform.position.y;
         }
     }
 }

@@ -162,7 +162,7 @@ public class Jump_Dash : MonoBehaviour
         }
 
         //ジャンプのオンオフについて使用
-        if (other.gameObject.tag == "Ground" || collision.gameObject.tag == "MoveFloor")
+        if (other.gameObject.tag == "Ground" || other.gameObject.tag == "MoveFloor")
         {
             isground = true;
             dash = false;
@@ -173,9 +173,9 @@ public class Jump_Dash : MonoBehaviour
             //地面に着地したらダッシュを停止
             rigid2D.velocity = new Vector2(0, rigid2D.velocity.y);
 
-            if(collision.gameObject.tag == "MovweFloor") 
+            if(other.gameObject.tag == "MoveFloor") 
             {
-                floorScript = collision.gameObject.GetComponent<MovingFloor>();
+                floorScript = other.gameObject.GetComponent<MovingFloor>();
                 onMoveFloor = true;
             }
         }
