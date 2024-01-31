@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-//----UI系のスクリプト----
-public class UI : MonoBehaviour
+//----ゲームシーンでのUI系のスクリプト----
+public class MainGameUI : MonoBehaviour
 {
 //----------コイン関連----------
     [SerializeField] GameObject[] stageCoins; // ステージ上に配置するコイン
@@ -20,10 +20,11 @@ public class UI : MonoBehaviour
     Coin coinScript;
 //----------コイン関連----------
 
-//----------リトライ・ゲームクリア（オーバー）----------
+//----------リトライ・ゲームクリア（オーバー）等----------
     [SerializeField] GameObject retryButton;
     [SerializeField] GameObject gameClearImage;
     [SerializeField] GameObject gameOverImage;
+    [SerializeField] GameObject selectButton; // ステージ選択ボタン
 
     [SerializeField] GameObject player;
     Jump_Dash playerScript;
@@ -37,6 +38,7 @@ public class UI : MonoBehaviour
         gameClearImage.SetActive(false);
         gameOverImage.SetActive(false);
         retryButton.SetActive(false);
+        selectButton.SetActive(false);
     }
 
     void Update()
@@ -65,10 +67,17 @@ public class UI : MonoBehaviour
         }
     }
 
+    // リトライボタンを押したとき
     public void Retry()
     {
         // 現在開いているシーンを再読み込み
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    // セレクトボタンを押したとき
+    public void Select()
+    {
+        SceneManager.LoadScene("Select_Scene");
     }
 
     // テキスト、ボタン関連の表示・非表示
@@ -77,11 +86,13 @@ public class UI : MonoBehaviour
         if (!player)
         {
             retryButton.SetActive(true);
+            selectButton.SetActive(true);
             gameOverImage.SetActive(true);
         }
         if (playerScript.GetIsClear)
         {
             retryButton.SetActive(true);
+            selectButton.SetActive(true);
             gameClearImage.SetActive(true);
         }
     }

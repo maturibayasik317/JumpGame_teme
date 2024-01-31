@@ -513,12 +513,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1862737957898859112, guid: 153ece8e4ca48664f99618ff82065396, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1862737957898859112, guid: 153ece8e4ca48664f99618ff82065396, type: 3}
       propertyPath: xAxis
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1862737957898859112, guid: 153ece8e4ca48664f99618ff82065396, type: 3}
       propertyPath: yAxis
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1862737957898859112, guid: 153ece8e4ca48664f99618ff82065396, type: 3}
+      propertyPath: moveTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3059970848805392925, guid: 153ece8e4ca48664f99618ff82065396, type: 3}
       propertyPath: m_Name

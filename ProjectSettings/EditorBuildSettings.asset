@@ -5,16 +5,28 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/UnityChan2D/Demo/Scenes/Start.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/oyama/UnityChan2D/Demo/Scenes/Loading 1-1.unity
     guid: a35423fc824db4fcab5346624a89eadd
-  - enabled: 1
+  - enabled: 0
     path: Assets/oyama/UnityChan2D/Demo/Scenes/Intro 1-1.unity
     guid: b624da3e00d714908a6ad67aba8ddba4
-  - enabled: 1
+  - enabled: 0
     path: Assets/oyama/UnityChan2D/Demo/Scenes/World 1-1.unity
     guid: bc1bc11bd56944cb68646a65a5fff077
+  - enabled: 1
+    path: Assets/Kaito/Scenes/Select_Scene.unity
+    guid: 4add1eee4964b014cad91e3b50b05387
+  - enabled: 1
+    path: Assets/Ren/Ren/Scenes/Ren_Scene1.unity
+    guid: 65e1f3abcf4305e4199ae1fd57bec116
+  - enabled: 1
+    path: Assets/taiyo/Scene/Stage2_Scene.unity
+    guid: 5fb43684e2b057c43a5e5dc4cdb10f45
+  - enabled: 1
+    path: Assets/taiyo/Scene/Stage3_Scene.unity
+    guid: 8d41431f22e55ba4f8afb36bcd9147d8
   m_configObjects: {}
