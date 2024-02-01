@@ -15,6 +15,8 @@ public class PlayerTest : MonoBehaviour
     bool dash = false;
     bool jump = false;
 
+    bool isClear = false;
+
 // 動く床の速度加算用の変数
 
     // rb.velocity用
@@ -30,11 +32,10 @@ public class PlayerTest : MonoBehaviour
 //
 
     bool isground = false;
-    bool fall = false;
-    float fallElapsedTime;
 
     // 読み取り専用プロパティ
     public bool GetDash => dash;
+    public bool GetIsClear => isClear;
 
     void Update()
     {
@@ -117,13 +118,13 @@ public class PlayerTest : MonoBehaviour
         {
             isground = true;
             dash = false;
-            fall = false;
+            //fall = false;
 
             // 追記
             jumpDuring = false;
             
             // 地面に着地したら落下経過時間をリセット
-            fallElapsedTime = 0.0f;
+            //fallElapsedTime = 0.0f;
             //地面に着地したらダッシュを停止
             rigid2D.velocity = new Vector2(0, rigid2D.velocity.y);
 
@@ -164,6 +165,10 @@ public class PlayerTest : MonoBehaviour
         {
             Destroy(gameObject);
             Debug.Log("ゲームオーバー");
+        }
+        if (collision.gameObject.CompareTag("ClearLine"))
+        {
+            isClear = true;
         }
     }
 }

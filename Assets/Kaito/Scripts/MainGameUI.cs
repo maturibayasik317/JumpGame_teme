@@ -27,13 +27,16 @@ public class MainGameUI : MonoBehaviour
     [SerializeField] GameObject selectButton; // ステージ選択ボタン
 
     [SerializeField] GameObject player;
-    Jump_Dash playerScript;
+    //Jump_Dash playerScript; // 本実装
+    PlayerTest playerScript;
 //----------リトライ・ゲームクリア（オーバー）----------
 
     void Start()
     {
         coinScript = coinPrefabs.GetComponent<Coin>();
-        playerScript = player.GetComponent<Jump_Dash>();
+        // 本実装
+        //playerScript = player.GetComponent<Jump_Dash>();
+        playerScript = player.GetComponent<PlayerTest>();
         
         gameClearImage.SetActive(false);
         gameOverImage.SetActive(false);

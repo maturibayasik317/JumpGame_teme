@@ -8,6 +8,13 @@ public class SelectSceneButton : MonoBehaviour
 {
     [SerializeField] ButtonType buttonType;
 
+    //// フェードイン・フェードアウト用
+    //[SerializeField] GameObject fadePanel;
+    //[SerializeField] float fadeWaitTime;
+    //GameObject fadeCanvasClone;
+    //FadeCanvas fadeScript;
+    ////
+
     // ボタンの種類（どのステージに対応しているか）
     enum ButtonType
     {
@@ -35,4 +42,9 @@ public class SelectSceneButton : MonoBehaviour
                 break;
         }
     }
+
+    //IEnumerator Fade()
+    //{
+
+    //}
 }
