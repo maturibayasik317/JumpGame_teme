@@ -50,6 +50,7 @@ public class Jump_Dash : MonoBehaviour
     //—‰ºˆ—
     void Fall()
     {
+        rigid2D.velocity = new Vector2(0, rigid2D.velocity.y);
         //rigid2D.velocity = new Vector2(0, -FallSpeed);
         rigid2D.gravityScale = DefaultGravityScale;
         Debug.Log("—‰º");
