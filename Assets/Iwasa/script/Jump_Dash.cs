@@ -7,6 +7,7 @@ public class Jump_Dash : MonoBehaviour
 {   //プレイヤーにコンポーネントしてください
     private Vector2 velocity;
     private int JumpCount = 0;//ジャンプ終了時の処理
+    private int DashCount = 0;//ダッシュ終了時の処理
     private bool jump = false;
     private bool isground;
     bool dash = false;
@@ -27,6 +28,7 @@ public class Jump_Dash : MonoBehaviour
     [SerializeField] float Dash_Distance;//ダッシュ距離10~20ぐらいがオススメ
     [SerializeField] float Jump_Power;//ジャンプ力500ぐらいがオススメ
     [SerializeField] private int Jump_Count = 1;//ジャンプ可能回数
+    [SerializeField] private int Dash_Count = 1;//ダッシュの可能回数
     [SerializeField] float Fall_Duration = 2.0f; // 落下開始からの持続時間
     [SerializeField] float FallSpeed = 0.1f;//落下速度
     [SerializeField] float DefaultGravityScale = 10.0f;
@@ -77,8 +79,11 @@ public class Jump_Dash : MonoBehaviour
         if (Input.GetKeyDown (KeyCode.Space))
         {
             if(isground == true) jump = true;
-            else if (!isground && !dash)
+            else if (!isground && !dash && DashCount < Dash_Count)
+            {
                 MoveDash();
+                DashCount++;
+            }
         }
 
         if (dash && dashElapsedTime > 0.5f)
@@ -113,10 +118,12 @@ public class Jump_Dash : MonoBehaviour
 
         if (GetComponent<Rigidbody2D>().IsTouching(filter2D))
         {
-            //地面についたら終わったらもう一回できるようにする
+            // 地面についたら終わったらもう一回できるようにする
             JumpCount = 1;
+            DashCount = 0; // ダッシュ可能回数をリセット
         }
         Jump_Count = Mathf.Max(0, Jump_Count);
+        Dash_Count = Mathf.Max(0, Dash_Count);
 
         // ジャンプ中かつダッシュ中でない場合にのみ落下処理
         if (!dash && !isground && !fall)
