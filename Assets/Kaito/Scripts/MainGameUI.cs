@@ -7,19 +7,6 @@ using UnityEngine.SceneManagement;
 //----ゲームシーンでのUI系のスクリプト----
 public class MainGameUI : MonoBehaviour
 {
-//----------コイン関連----------
-    [SerializeField] GameObject[] stageCoins; // ステージ上に配置するコイン
-    
-    [SerializeField] Sprite coinSprite; // コイン画像
-    [SerializeField] Image[] coinImages; // UIとして表示するコイン
-    [SerializeField] GameObject coinPrefabs;
-
-    // 獲得したコイン数を表示するテキスト
-    [SerializeField] Text coinNumText;
-
-    Coin coinScript;
-//----------コイン関連----------
-
 //----------リトライ・ゲームクリア（オーバー）等----------
     [SerializeField] GameObject retryButton;
     [SerializeField] GameObject gameClearImage;
@@ -33,7 +20,6 @@ public class MainGameUI : MonoBehaviour
 
     void Start()
     {
-        coinScript = coinPrefabs.GetComponent<Coin>();
         // 本実装
         //playerScript = player.GetComponent<Jump_Dash>();
         playerScript = player.GetComponent<PlayerTest>();
@@ -46,28 +32,7 @@ public class MainGameUI : MonoBehaviour
 
     void Update()
     {
-        // 獲得したコイン数 / ステージに配置したコイン数
-        coinNumText.text = $"Coin：{coinScript.GetPlayerCoin}／{stageCoins.Length}";
-        ChangeSprite();
-        
         TextAndButton();
-    }
-
-    // コイン画像に変更する
-    void ChangeSprite()
-    {
-        if (!stageCoins[0])
-        {
-            coinImages[0].sprite = coinSprite;
-        }
-        if (!stageCoins[1])
-        {
-            coinImages[1].sprite = coinSprite;
-        }
-        if (!stageCoins[2])
-        {
-            coinImages[2].sprite = coinSprite;
-        }
     }
 
     // リトライボタンを押したとき

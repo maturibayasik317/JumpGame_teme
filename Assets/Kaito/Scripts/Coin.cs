@@ -15,14 +15,21 @@ public class Coin : MonoBehaviour
     static int getCoin = 0; // シーンを読み込んだときのみ初期化される
     public int GetPlayerCoin => getCoin;
 
+    // ステージセレクト画面で表示されるコイン取得数
+    static int stageCoinNum;
+    public int GetStageCoinNum => stageCoinNum;
+
     // コイン取得時の効果音
     [SerializeField] AudioClip sound;
     AudioSource audioSource;
+
+    CoinManager coinManagerScript;
 
     void Start()
     {
         particle.Play();
         audioSource = GetComponent<AudioSource>();
+        coinManagerScript = GameObject.FindWithTag("UI").GetComponent<CoinManager>();
     }
 
     void Update()
@@ -53,6 +60,26 @@ public class Coin : MonoBehaviour
         particle.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
+    void CoinState()
+    {
+        if (coinManagerScript.GetOnStageSelect)
+        {
+
+        }
+        else if (coinManagerScript.GetOnStage_1)
+        {
+
+        }
+        else if (coinManagerScript.GetOnStage_2)
+        {
+
+        }
+        else if (coinManagerScript.GetOnStage_3)
+        {
+
+        }
+    }
+
     // コイン取得時の処理
     IEnumerator CoinDestroy()
     {
@@ -70,11 +97,11 @@ public class Coin : MonoBehaviour
     {
         // シーンが読み込まれた際に、追加したメソッド（init）が呼び出される
         // AwakeとStartの間で実行される
-        SceneManager.sceneLoaded += init;
+        SceneManager.sceneLoaded += Init;
     }
     
     // シーンが読み込まれたとき、コインの取得数を初期化
-    static void init(Scene loadingScene, LoadSceneMode loadSceneMode)
+    static void Init(Scene loadingScene, LoadSceneMode loadSceneMode)
     {
         getCoin = 0;
     }
