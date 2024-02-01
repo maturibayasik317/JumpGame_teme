@@ -26,7 +26,7 @@ public class Jump_Dash : MonoBehaviour
 
     private float dashElapsedTime = 0.0f;//ダッシュが始まってからの落下までの猶予
     private float fallElapsedTime = 0.0f; // 落下開始からの経過時間
-    [SerializeField] float Dash_Distance;//ダッシュ距離10~20ぐらいがオススメ
+    //[SerializeField] float Dash_Distance;//ダッシュ距離10~20ぐらいがオススメ
     [SerializeField] float Jump_Power;//ジャンプ力500ぐらいがオススメ
     [SerializeField] private int Jump_Count = 1;//ジャンプ可能回数
     [SerializeField] private int Dash_Count = 1;//ダッシュの可能回数
@@ -44,14 +44,15 @@ public class Jump_Dash : MonoBehaviour
 
     void MoveDash()//ジャンプ中にSpeace押した時のダッシュ処理
     {
-
         dash = true;
         dashElapsedTime = 0.0f;
         fallElapsedTime = 0.0f; // ダッシュが始まったので落下経過時間をリセット
 
-        rigid2D.velocity = new Vector2(DashSpeed, 0); // Dash_Distance / 0.5f はダッシュにかかる時間を示しています
-        rigid2D.gravityScale = 0.0f;
+        rigid2D.velocity = new Vector2(DashSpeed, 0);
+        //DashSpeed = Dash_Distance / 0.5f;
+        //rigid2D.velocity = new Vector2(DashSpeed, 0);
 
+        rigid2D.gravityScale = 0.0f;
         dashAudioSource.Play();
         Debug.Log ("横移動");
     }
