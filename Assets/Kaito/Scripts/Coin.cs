@@ -14,9 +14,14 @@ public class Coin : MonoBehaviour
     static int getCoin = 0;
     public int GetPlayerCoin => getCoin;
 
+    // コイン取得時の効果音
+    [SerializeField] AudioClip sound;
+    AudioSource audioSource;
+
     void Start()
     {
         particle.Play();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -28,9 +33,7 @@ public class Coin : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            particle.Stop();
-            getCoin += 1;
-            Destroy(gameObject);
+            StartCoroutine(CoinDestroy());
         }
     }
 
@@ -47,5 +50,17 @@ public class Coin : MonoBehaviour
         // 子オブジェクトは回転しないように上書き
         // 引数には、パーティクルのRotationを代入
         particle.transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    // コイン取得時の処理
+    IEnumerator CoinDestroy()
+    {
+        audioSource.PlayOneShot(sound); // soundを1回鳴らす
+        particle.Stop();
+
+        yield return new WaitForSeconds(1.0f);
+
+        getCoin += 1; // UIで使用
+        Destroy(gameObject);
     }
 }
