@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Jump_Dash : MonoBehaviour
 {   //プレイヤーにコンポーネントしてください
@@ -32,6 +33,8 @@ public class Jump_Dash : MonoBehaviour
     [SerializeField] float Fall_Duration = 2.0f; // 落下開始からの持続時間
     [SerializeField] float FallSpeed = 0.1f;//落下速度
     [SerializeField] float DefaultGravityScale = 10.0f;
+    [SerializeField] float DashSpeed = 10.0f; // ダッシュ時の速度
+
     //動く床の速度加速用
     Vector2 jumpVec = Vector2.zero;
     Vector2 addVelocity = Vector2.zero;
@@ -46,7 +49,7 @@ public class Jump_Dash : MonoBehaviour
         dashElapsedTime = 0.0f;
         fallElapsedTime = 0.0f; // ダッシュが始まったので落下経過時間をリセット
 
-        rigid2D.velocity = new Vector2(Dash_Distance / 0.5f, 0); // Dash_Distance / 0.5f はダッシュにかかる時間を示しています
+        rigid2D.velocity = new Vector2(DashSpeed, 0); // Dash_Distance / 0.5f はダッシュにかかる時間を示しています
         rigid2D.gravityScale = 0.0f;
 
         dashAudioSource.Play();
@@ -57,7 +60,6 @@ public class Jump_Dash : MonoBehaviour
     void Fall()
     {
         rigid2D.velocity = new Vector2(0, rigid2D.velocity.y);
-        //rigid2D.velocity = new Vector2(0, -FallSpeed);
         rigid2D.gravityScale = DefaultGravityScale;
         Debug.Log("落下");
     }
@@ -151,9 +153,6 @@ public class Jump_Dash : MonoBehaviour
                 rigid2D.velocity =new Vector2(0,0) + addVelocity;
             }
         }
-
-        EndGame();
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -203,14 +202,6 @@ public class Jump_Dash : MonoBehaviour
             Debug.Log("床から離れた");
             floorScript = null;
             onMoveFloor = false;
-        }
-    }
-
-    private void EndGame()
-    {
-        if(Input.GetKey(KeyCode.Exclaim))
-        {
-            
         }
     }
 }
