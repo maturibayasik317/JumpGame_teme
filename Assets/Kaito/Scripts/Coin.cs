@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //----コインの動き等----
 public class Coin : MonoBehaviour
@@ -11,7 +12,7 @@ public class Coin : MonoBehaviour
     Vector3 axis = Vector3.up; // 回転軸
 
     // プレイヤーが取得したコイン数
-    static int getCoin = 0;
+    static int getCoin = 0; // シーンを読み込んだときのみ初期化される
     public int GetPlayerCoin => getCoin;
 
     // コイン取得時の効果音
@@ -63,4 +64,19 @@ public class Coin : MonoBehaviour
         getCoin += 1; // UIで使用
         Destroy(gameObject);
     }
+
+//-------static変数の初期化用関数-------
+    static Coin()
+    {
+        // シーンが読み込まれた際に、追加したメソッド（init）が呼び出される
+        // AwakeとStartの間で実行される
+        SceneManager.sceneLoaded += init;
+    }
+    
+    // シーンが読み込まれたとき、コインの取得数を初期化
+    static void init(Scene loadingScene, LoadSceneMode loadSceneMode)
+    {
+        getCoin = 0;
+    }
+//---------------------------------------
 }
