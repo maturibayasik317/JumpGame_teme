@@ -313,14 +313,13 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  Dash_Distance: 20
   Jump_Power: 2000
   Jump_Count: 1
   Dash_Count: 1
   Fall_Duration: 2
   FallSpeed: 5
   DefaultGravityScale: 10
-  DashSpeed: 100
+  DashSpeed: 40
 --- !u!82 &259108160
 AudioSource:
   m_ObjectHideFlags: 0
