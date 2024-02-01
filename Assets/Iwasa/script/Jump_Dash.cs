@@ -16,6 +16,9 @@ public class Jump_Dash : MonoBehaviour
     bool isClear = false;
     public bool GetIsClear => isClear;
 
+    public AudioSource jumpAudioSource;//ジャンプの音
+    public AudioSource dashAudioSource;//ダッシュの音
+
     Rigidbody2D rigid2D;
     [SerializeField] ContactFilter2D filter2D;
 
@@ -44,6 +47,7 @@ public class Jump_Dash : MonoBehaviour
         rigid2D.velocity = new Vector2(Dash_Distance / 0.5f, 0); // Dash_Distance / 0.5f はダッシュにかかる時間を示しています
         rigid2D.gravityScale = 0.0f;
 
+        dashAudioSource.Play();
         Debug.Log ("横移動");
     }
 
@@ -88,6 +92,9 @@ public class Jump_Dash : MonoBehaviour
             jumpDuring = true;
             rigid2D.velocity = Vector2.zero;
             jumpVec =transform.up * Jump_Power;//引数を保存した変数に変更
+
+            jumpAudioSource.Play();
+
             //ジャンプさせる
             this.rigid2D.AddForce(transform.up * Jump_Power);
             if(onMoveFloor)
