@@ -499,6 +499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonType: 2
+  coinPrefab: {fileID: 1356922986846728647, guid: 6d6e445e6a2eaf4479e03717818ca634, type: 3}
 --- !u!1 &435698298
 GameObject:
   m_ObjectHideFlags: 0
@@ -1408,6 +1409,107 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1261142605
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1954554005864831065, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: m_Name
+      value: CoinManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369862031963695067, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369862031963695067, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369862031963695067, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369862031963695067, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369862031963695067, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369862031963695067, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369862031963695067, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369862031963695067, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369862031963695067, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369862031963695067, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: gameSceneType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: coinImages.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: coinImages.Array.data[0]
+      value: 
+      objectReference: {fileID: 1160470011}
+    - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: coinImages.Array.data[1]
+      value: 
+      objectReference: {fileID: 1844575737}
+    - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: coinImages.Array.data[2]
+      value: 
+      objectReference: {fileID: 1640300508}
+    - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: coinImages.Array.data[3]
+      value: 
+      objectReference: {fileID: 882569331}
+    - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: coinImages.Array.data[4]
+      value: 
+      objectReference: {fileID: 1103964145}
+    - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: coinImages.Array.data[5]
+      value: 
+      objectReference: {fileID: 218113828}
+    - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: coinImages.Array.data[6]
+      value: 
+      objectReference: {fileID: 597607084}
+    - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: coinImages.Array.data[7]
+      value: 
+      objectReference: {fileID: 281849308}
+    - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: coinImages.Array.data[8]
+      value: 
+      objectReference: {fileID: 2076633327}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
 --- !u!1 &1319074770
 GameObject:
   m_ObjectHideFlags: 0
@@ -1420,6 +1522,7 @@ GameObject:
   - component: {fileID: 1319074774}
   - component: {fileID: 1319074773}
   - component: {fileID: 1319074772}
+  - component: {fileID: 1319074775}
   m_Layer: 5
   m_Name: CoinResetButton
   m_TagString: Untagged
@@ -1490,7 +1593,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1319074773}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1319074775}
+        m_TargetAssemblyTypeName: SelectSceneButton, Assembly-CSharp
+        m_MethodName: StageButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1319074773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1504,7 +1619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.25490198}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1529,6 +1644,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1319074770}
   m_CullTransparentMesh: 1
+--- !u!114 &1319074775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1319074770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3b44d0ffd996d1419f50b2f60ae7910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonType: 3
+  coinPrefab: {fileID: 1356922986846728647, guid: 6d6e445e6a2eaf4479e03717818ca634, type: 3}
 --- !u!1 &1319445730
 GameObject:
   m_ObjectHideFlags: 0
@@ -1770,6 +1899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonType: 0
+  coinPrefab: {fileID: 1356922986846728647, guid: 6d6e445e6a2eaf4479e03717818ca634, type: 3}
 --- !u!1 &1640300506
 GameObject:
   m_ObjectHideFlags: 0
@@ -2421,6 +2551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonType: 1
+  coinPrefab: {fileID: 1356922986846728647, guid: 6d6e445e6a2eaf4479e03717818ca634, type: 3}
 --- !u!1 &1966816597
 GameObject:
   m_ObjectHideFlags: 0
@@ -2659,3 +2790,4 @@ SceneRoots:
   - {fileID: 1887205434}
   - {fileID: 1936819386}
   - {fileID: 478425171}
+  - {fileID: 1261142605}

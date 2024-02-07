@@ -12,6 +12,8 @@ public class MainGameUI : MonoBehaviour
     [SerializeField] GameObject gameClearImage;
     [SerializeField] GameObject gameOverImage;
     [SerializeField] GameObject selectButton; // ステージ選択ボタン
+    bool onSelect = false;
+    public bool GetOnSelect => onSelect;
 
     [SerializeField] GameObject player;
     //Jump_Dash playerScript; // 本実装
@@ -45,6 +47,7 @@ public class MainGameUI : MonoBehaviour
     // セレクトボタンを押したとき
     public void Select()
     {
+        onSelect = true;
         SceneManager.LoadScene("Select_Scene");
     }
 

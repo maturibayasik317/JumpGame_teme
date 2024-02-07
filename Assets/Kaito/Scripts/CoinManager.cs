@@ -7,129 +7,108 @@ using UnityEngine.UI;
 public class CoinManager : MonoBehaviour
 {
     [SerializeField] GameObject[] stageCoins; // ステージ上に配置するコイン
-
     [SerializeField] Sprite coinSprite; // コイン画像
     [SerializeField] Image[] coinImages; // UIとして表示するコイン
-    [SerializeField] GameObject coinPrefabs;
+    [SerializeField] GameObject coinPrefab;
+    [SerializeField] GameObject uiCanvas;
 
     // 獲得したコイン数を表示するテキスト
     [SerializeField] Text coinNumText;
 
     Coin coinScript;
+    MainGameUI mainUIScript;
 
-    //[SerializeField] GameSceneType gameSceneType;
-    //bool onStageSelect = false;
-    //bool onStage_1 = false;
-    //bool onStage_2 = false;
-    //bool onStage_3 = false;
-
-    //// 「Coin.cs」で使用
-    //public bool GetOnStageSelect => onStageSelect;
-    //public bool GetOnStage_1 => onStage_1;
-    //public bool GetOnStage_2 => onStage_2;
-    //public bool GetOnStage_3 => onStage_3;
-
-    //// どのシーンにいるか
-    //enum GameSceneType
-    //{
-    //    STAGE_SELECT,
-    //    STAGE_1,
-    //    STAGE_2,
-    //    STAGE_3
-    //}
-
-    //// どのシーンかを整数で渡す
-    //public int GetGameSceneType => (int)gameSceneType;
+    // どのシーンにいるか
+    public enum GameSceneType
+    {
+        STAGE_SELECT = 0,
+        STAGE_1,
+        STAGE_2,
+        STAGE_3
+    }
+    public GameSceneType gameSceneType;
 
     void Start()
     {
-        coinScript = coinPrefabs.GetComponent<Coin>();
-        
-        //// ステージごとにコイン数を取得
-        //switch (gameSceneType)
-        //{
-        //    case GameSceneType.STAGE_SELECT:
-        //        // 初期化処理
-        //        StageSelectCoin();
-        //        break;
-        //    case GameSceneType.STAGE_1:
-        //        Stage_1Coin();
-        //        break;
-        //    case GameSceneType.STAGE_2:
-        //        Stage_2Coin();
-        //        break;
-        //    case GameSceneType.STAGE_3:
-        //        Stage_3Coin();
-        //        break;
-        //}
+        if (uiCanvas != null) // 参照エラー回避
+        {
+            mainUIScript = uiCanvas.GetComponent<MainGameUI>();
+        }
+        coinScript = coinPrefab.GetComponent<Coin>();
     }
 
     void Update()
     {
-        // 獲得したコイン数 / ステージに配置したコイン数
-        coinNumText.text = $"Coin：{coinScript.GetPlayerCoin}／{stageCoins.Length}";
-
+        if (coinNumText != null) // 参照エラー回避
+        {
+            // ステージごとにコイン枚数を取得
+            switch (gameSceneType)
+            {
+                // ステージ1
+                case GameSceneType.STAGE_1:
+                    // 獲得したコイン数 / ステージに配置したコイン数
+                    coinNumText.text = $"コイン : {coinScript.PlayerCoin_Stage1} / {stageCoins.Length}";
+                    break;
+                // ステージ2
+                case GameSceneType.STAGE_2:
+                    coinNumText.text = $"コイン : {coinScript.PlayerCoin_Stage2} / {stageCoins.Length}";
+                    break;
+                // ステージ3
+                case GameSceneType.STAGE_3:
+                    coinNumText.text = $"コイン : {coinScript.PlayerCoin_Stage3} / {stageCoins.Length}";
+                    break;
+            }
+        }
+        
         ChangeSprite();
     }
 
     // コイン画像に変更する
     void ChangeSprite()
     {
-        if (!stageCoins[0])
+        // ステージ選択画面以外で
+        if (gameSceneType != GameSceneType.STAGE_SELECT)
         {
-            coinImages[0].sprite = coinSprite;
-        }
-        if (!stageCoins[1])
-        {
-            coinImages[1].sprite = coinSprite;
-        }
-        if (!stageCoins[2])
-        {
-            coinImages[2].sprite = coinSprite;
+            if (!stageCoins[0])
+            {
+                coinImages[0].sprite = coinSprite;
+            }
+            if (!stageCoins[1])
+            {
+                coinImages[1].sprite = coinSprite;
+            }
+            if (!stageCoins[2])
+            {
+                coinImages[2].sprite = coinSprite;
+            }
         }
     }
 
-//--------ステージごとの処理--------
+    //--------ステージごとの処理--------
 
-    //// ステージセレクトでの処理
+    // ステージセレクトでの処理
     //void StageSelectCoin()
     //{
-    //    onStageSelect = true;
         
-    //    onStage_1 = false;
-    //    onStage_2 = false;
-    //    onStage_3 = false;
     //}
 
     //// ステージ1での処理
     //void Stage_1Coin()
     //{
-    //    onStage_1 = true;
-
-    //    onStageSelect = false;
-    //    onStage_2 = false;
-    //    onStage_3 = false;
+        
     //}
 
     //// ステージ2での処理
     //void Stage_2Coin()
     //{
-    //    onStage_2 = true;
-
-    //    onStageSelect = false;
-    //    onStage_1 = false;
-    //    onStage_3 = false;
+        
     //}
 
     //// ステージ3での処理
     //void Stage_3Coin()
     //{
-    //    onStage_3 = true;
-
-    //    onStageSelect = false;
-    //    onStage_1 = false;
-    //    onStage_2 = false;
+        
     //}
 
-//-------------------------------
+    //-------------------------------
 }

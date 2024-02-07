@@ -16,15 +16,16 @@ public class SelectSceneButton : MonoBehaviour
     }
     [SerializeField] ButtonType buttonType;
 
-    bool isCoinReset = false;
-    public bool GetCoinReset => isCoinReset;
+    [SerializeField] GameObject coinPrefab;
+    Coin coinScript;
 
-    //// フェードイン・フェードアウト用
-    //[SerializeField] GameObject fadePanel;
-    //[SerializeField] float fadeWaitTime;
-    //GameObject fadeCanvasClone;
-    //FadeCanvas fadeScript;
-    ////
+    void Start()
+    {
+        if (coinPrefab != null) // 参照エラー回避
+        {
+            coinScript = coinPrefab.GetComponent<Coin>();
+        }
+    }
 
     // ボタンを押したときの処理（シーン遷移）
     public void StageButton()
@@ -45,12 +46,27 @@ public class SelectSceneButton : MonoBehaviour
                 // 本実装 // SceneManager.LoadScene("Stage3_Scene");
                 break;
             case ButtonType.COINRESET:
-                isCoinReset = true;
+                CoinReset();
                 break;
             default:
                 break;
         }
     }
+
+    // 全ステージのコイン枚数をリセット
+    void CoinReset()
+    {
+        coinScript.PlayerCoin_Stage1 = 0;
+        coinScript.PlayerCoin_Stage2 = 0;
+        coinScript.PlayerCoin_Stage3 = 0;
+    }
+
+    //// フェードイン・フェードアウト用
+    //[SerializeField] GameObject fadePanel;
+    //[SerializeField] float fadeWaitTime;
+    //GameObject fadeCanvasClone;
+    //FadeCanvas fadeScript;
+    ////
 
     //IEnumerator Fade()
     //{

@@ -8,44 +8,43 @@ public class Coin : MonoBehaviour
 {
     [SerializeField] float angle; // 何度ずつ回転させるか
     [SerializeField] ParticleSystem particle;
-    
+
     Vector3 axis = Vector3.up; // 回転軸
 
     // プレイヤーが取得したコイン数
-    static int getCoin = 0; // シーンを読み込んだときのみ初期化される
-    public int GetPlayerCoin => getCoin;
+    // リセットボタンを押したときのみ初期化される
+    static int getCoin_Stage1 = 0;
+    static int getCoin_Stage2 = 0;
+    static int getCoin_Stage3 = 0;
 
-    // ステージセレクト画面で表示されるコイン取得数
-    static int stageCoinNum;
-    public int GetStageCoinNum => stageCoinNum;
-
-    // どのシーンのコインか
-    enum GameSceneType
+    // プロパティ
+    public int PlayerCoin_Stage1
     {
-        STAGE_SELECT,
-        STAGE_1,
-        STAGE_2,
-        STAGE_3
+        get { return getCoin_Stage1; }
+        set { getCoin_Stage1 = value; }
     }
-    [SerializeField] GameSceneType gameSceneType;
+    public int PlayerCoin_Stage2
+    {
+        get { return getCoin_Stage2; }
+        set { getCoin_Stage2 = value; }
+    }
+    public int PlayerCoin_Stage3
+    {
+        get { return getCoin_Stage3; }
+        set { getCoin_Stage3 = value; }
+    }
 
     // コイン取得時の効果音
     [SerializeField] AudioClip sound;
     AudioSource audioSource;
 
     CoinManager coinManagerScript;
-    //[SerializeField] GameObject coinResetButton;
-    //static SelectSceneButton selectSceneButtonScript;
 
     void Start()
     {
         particle.Play();
         audioSource = GetComponent<AudioSource>();
-        coinManagerScript = GameObject.FindWithTag("UI").GetComponent<CoinManager>();
-        //if (coinResetButton)
-        //{
-        //    selectSceneButtonScript = GameObject.Find("CoinResetButton").GetComponent<SelectSceneButton>();
-        //}
+        coinManagerScript = GameObject.Find("CoinManager").GetComponent<CoinManager>();
     }
 
     void Update()
@@ -76,55 +75,79 @@ public class Coin : MonoBehaviour
         particle.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
-    void CoinState()
-    {
-        // ステージごとにコイン数を取得
-        switch (gameSceneType)
-        {
-            case GameSceneType.STAGE_SELECT:
-                // 初期化処理
-                //StageSelectCoin();
-                break;
-            case GameSceneType.STAGE_1:
-                //Stage_1Coin();
-                break;
-            case GameSceneType.STAGE_2:
-                //Stage_2Coin();
-                break;
-            case GameSceneType.STAGE_3:
-                //Stage_3Coin();
-                break;
-        }
-    }
-
     // コイン取得時の処理
     IEnumerator CoinDestroy()
     {
         audioSource.PlayOneShot(sound); // soundを1回鳴らす
         particle.Stop();
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.8f);
 
-        getCoin += 1; // UIで使用
+        // ステージ1
+        if (coinManagerScript.gameSceneType == CoinManager.GameSceneType.STAGE_1)
+        {
+            getCoin_Stage1 += 1; // UIで使用
+        }
+        // ステージ2
+        else if (coinManagerScript.gameSceneType == CoinManager.GameSceneType.STAGE_2)
+        {
+            getCoin_Stage2 += 1;
+        }
+        // ステージ3
+        else if (coinManagerScript.gameSceneType == CoinManager.GameSceneType.STAGE_3)
+        {
+            getCoin_Stage3 += 1;
+        }
+        
         Destroy(gameObject);
     }
 
-//-------static変数の初期化用関数-------
-    static Coin()
-    {
-        //if (selectSceneButtonScript.GetCoinReset)
-        //{
-        //    // シーンが読み込まれた際に、追加したメソッド（init）が呼び出される
-        //    // AwakeとStartの間で実行される
-        //    SceneManager.sceneLoaded += Init;
-        //}
-        SceneManager.sceneLoaded += Init;
-    }
-    
-    // シーンが読み込まれたとき、コインの取得数を初期化
-    static void Init(Scene loadingScene, LoadSceneMode loadSceneMode)
-    {
-        getCoin = 0;
-    }
-//---------------------------------------
+
+    //-------static変数の初期化用関数-------
+    //static Coin()
+    //{
+    //    SceneManager.sceneLoaded += Init;
+    //}
+
+    //// シーンが読み込まれたとき、コインの取得数を初期化
+    //static void Init(Scene loadingScene, LoadSceneMode loadSceneMode)
+    //{
+    //    getCoin = 0;
+    //}
+    //---------------------------------------
+
+    //// ステージセレクト画面で表示されるコイン取得数
+    //static int stageCoinNum;
+    //public int GetStageCoinNum => stageCoinNum;
+
+    //// どのシーンのコインか
+    //enum GameSceneType
+    //{
+    //    STAGE_SELECT,
+    //    STAGE_1,
+    //    STAGE_2,
+    //    STAGE_3
+    //}
+    //[SerializeField] GameSceneType gameSceneType;
+
+    //void CoinState()
+    //{
+    //// ステージごとにコイン数を取得
+    //switch (gameSceneType)
+    //{
+    //    case GameSceneType.STAGE_SELECT:
+    //        // 初期化処理
+    //        //StageSelectCoin();
+    //        break;
+    //    case GameSceneType.STAGE_1:
+    //        //Stage_1Coin();
+    //        break;
+    //    case GameSceneType.STAGE_2:
+    //        //Stage_2Coin();
+    //        break;
+    //    case GameSceneType.STAGE_3:
+    //        //Stage_3Coin();
+    //        break;
+    //}
+    //}
 }

@@ -10,7 +10,7 @@ public class SelectSceneUI : MonoBehaviour
 
     void Start()
     {
-        coinManagerScript = GameObject.FindWithTag("UI").GetComponent<CoinManager>();
+        coinManagerScript = GameObject.Find("CoinManager").GetComponent<CoinManager>();
     }
 
     void Update()

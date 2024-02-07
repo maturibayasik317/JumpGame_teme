@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5318247664892685934}
   - component: {fileID: 856307674767441109}
   - component: {fileID: 3220890666758517977}
-  - component: {fileID: 8833947401406479215}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: UI
@@ -129,30 +128,6 @@ MonoBehaviour:
   gameOverImage: {fileID: 1484611146552518411}
   selectButton: {fileID: 7256598708144405564}
   player: {fileID: 0}
---- !u!114 &8833947401406479215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 215985906154557725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 792ab1f74ca4af447b21fff697b94b64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stageCoins:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  coinSprite: {fileID: 21300000, guid: 695fb51ed22795344846dea0e5cd4583, type: 3}
-  coinImages:
-  - {fileID: 2411055518291952929}
-  - {fileID: 7007234454850516546}
-  - {fileID: 5146179829955009987}
-  coinPrefabs: {fileID: 1356922986846728647, guid: 6d6e445e6a2eaf4479e03717818ca634, type: 3}
-  coinNumText: {fileID: 4947590116283008982}
-  gameSceneType: 1
 --- !u!1 &1027103758685214436
 GameObject:
   m_ObjectHideFlags: 0
