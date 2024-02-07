@@ -17,51 +17,51 @@ public class CoinManager : MonoBehaviour
 
     Coin coinScript;
 
-    [SerializeField] GameSceneType gameSceneType;
-    bool onStageSelect = false;
-    bool onStage_1 = false;
-    bool onStage_2 = false;
-    bool onStage_3 = false;
+    //[SerializeField] GameSceneType gameSceneType;
+    //bool onStageSelect = false;
+    //bool onStage_1 = false;
+    //bool onStage_2 = false;
+    //bool onStage_3 = false;
 
-    // 「Coin.cs」で使用
-    public bool GetOnStageSelect => onStageSelect;
-    public bool GetOnStage_1 => onStage_1;
-    public bool GetOnStage_2 => onStage_2;
-    public bool GetOnStage_3 => onStage_3;
+    //// 「Coin.cs」で使用
+    //public bool GetOnStageSelect => onStageSelect;
+    //public bool GetOnStage_1 => onStage_1;
+    //public bool GetOnStage_2 => onStage_2;
+    //public bool GetOnStage_3 => onStage_3;
 
-    // どのシーンにいるか
-    enum GameSceneType
-    {
-        STAGE_SELECT,
-        STAGE_1,
-        STAGE_2,
-        STAGE_3
-    }
+    //// どのシーンにいるか
+    //enum GameSceneType
+    //{
+    //    STAGE_SELECT,
+    //    STAGE_1,
+    //    STAGE_2,
+    //    STAGE_3
+    //}
 
-    // どのシーンかを整数で渡す
-    public int GetGameSceneType => (int)gameSceneType;
+    //// どのシーンかを整数で渡す
+    //public int GetGameSceneType => (int)gameSceneType;
 
     void Start()
     {
         coinScript = coinPrefabs.GetComponent<Coin>();
         
-        // ステージごとにコイン数を取得
-        switch (gameSceneType)
-        {
-            case GameSceneType.STAGE_SELECT:
-                // 初期化処理
-                StageSelectCoin();
-                break;
-            case GameSceneType.STAGE_1:
-                Stage_1Coin();
-                break;
-            case GameSceneType.STAGE_2:
-                Stage_2Coin();
-                break;
-            case GameSceneType.STAGE_3:
-                Stage_3Coin();
-                break;
-        }
+        //// ステージごとにコイン数を取得
+        //switch (gameSceneType)
+        //{
+        //    case GameSceneType.STAGE_SELECT:
+        //        // 初期化処理
+        //        StageSelectCoin();
+        //        break;
+        //    case GameSceneType.STAGE_1:
+        //        Stage_1Coin();
+        //        break;
+        //    case GameSceneType.STAGE_2:
+        //        Stage_2Coin();
+        //        break;
+        //    case GameSceneType.STAGE_3:
+        //        Stage_3Coin();
+        //        break;
+        //}
     }
 
     void Update()
@@ -91,45 +91,45 @@ public class CoinManager : MonoBehaviour
 
 //--------ステージごとの処理--------
 
-    // ステージセレクトでの処理
-    void StageSelectCoin()
-    {
-        onStageSelect = true;
+    //// ステージセレクトでの処理
+    //void StageSelectCoin()
+    //{
+    //    onStageSelect = true;
         
-        bool onStage_1 = false;
-        bool onStage_2 = false;
-        bool onStage_3 = false;
-    }
+    //    onStage_1 = false;
+    //    onStage_2 = false;
+    //    onStage_3 = false;
+    //}
 
-    // ステージ1での処理
-    void Stage_1Coin()
-    {
-        onStage_1 = true;
+    //// ステージ1での処理
+    //void Stage_1Coin()
+    //{
+    //    onStage_1 = true;
 
-        bool onStageSelect = false;
-        bool onStage_2 = false;
-        bool onStage_3 = false;
-    }
+    //    onStageSelect = false;
+    //    onStage_2 = false;
+    //    onStage_3 = false;
+    //}
 
-    // ステージ2での処理
-    void Stage_2Coin()
-    {
-        onStage_2 = true;
+    //// ステージ2での処理
+    //void Stage_2Coin()
+    //{
+    //    onStage_2 = true;
 
-        bool onStageSelect = false;
-        bool onStage_1 = false;
-        bool onStage_3 = false;
-    }
+    //    onStageSelect = false;
+    //    onStage_1 = false;
+    //    onStage_3 = false;
+    //}
 
-    // ステージ3での処理
-    void Stage_3Coin()
-    {
-        onStage_3 = true;
+    //// ステージ3での処理
+    //void Stage_3Coin()
+    //{
+    //    onStage_3 = true;
 
-        bool onStageSelect = false;
-        bool onStage_1 = false;
-        bool onStage_2 = false;
-    }
+    //    onStageSelect = false;
+    //    onStage_1 = false;
+    //    onStage_2 = false;
+    //}
 
 //-------------------------------
 }

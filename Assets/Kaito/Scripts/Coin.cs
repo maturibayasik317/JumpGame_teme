@@ -19,17 +19,33 @@ public class Coin : MonoBehaviour
     static int stageCoinNum;
     public int GetStageCoinNum => stageCoinNum;
 
+    // どのシーンのコインか
+    enum GameSceneType
+    {
+        STAGE_SELECT,
+        STAGE_1,
+        STAGE_2,
+        STAGE_3
+    }
+    [SerializeField] GameSceneType gameSceneType;
+
     // コイン取得時の効果音
     [SerializeField] AudioClip sound;
     AudioSource audioSource;
 
     CoinManager coinManagerScript;
+    //[SerializeField] GameObject coinResetButton;
+    //static SelectSceneButton selectSceneButtonScript;
 
     void Start()
     {
         particle.Play();
         audioSource = GetComponent<AudioSource>();
         coinManagerScript = GameObject.FindWithTag("UI").GetComponent<CoinManager>();
+        //if (coinResetButton)
+        //{
+        //    selectSceneButtonScript = GameObject.Find("CoinResetButton").GetComponent<SelectSceneButton>();
+        //}
     }
 
     void Update()
@@ -62,21 +78,22 @@ public class Coin : MonoBehaviour
 
     void CoinState()
     {
-        if (coinManagerScript.GetOnStageSelect)
+        // ステージごとにコイン数を取得
+        switch (gameSceneType)
         {
-
-        }
-        else if (coinManagerScript.GetOnStage_1)
-        {
-
-        }
-        else if (coinManagerScript.GetOnStage_2)
-        {
-
-        }
-        else if (coinManagerScript.GetOnStage_3)
-        {
-
+            case GameSceneType.STAGE_SELECT:
+                // 初期化処理
+                //StageSelectCoin();
+                break;
+            case GameSceneType.STAGE_1:
+                //Stage_1Coin();
+                break;
+            case GameSceneType.STAGE_2:
+                //Stage_2Coin();
+                break;
+            case GameSceneType.STAGE_3:
+                //Stage_3Coin();
+                break;
         }
     }
 
@@ -95,8 +112,12 @@ public class Coin : MonoBehaviour
 //-------static変数の初期化用関数-------
     static Coin()
     {
-        // シーンが読み込まれた際に、追加したメソッド（init）が呼び出される
-        // AwakeとStartの間で実行される
+        //if (selectSceneButtonScript.GetCoinReset)
+        //{
+        //    // シーンが読み込まれた際に、追加したメソッド（init）が呼び出される
+        //    // AwakeとStartの間で実行される
+        //    SceneManager.sceneLoaded += Init;
+        //}
         SceneManager.sceneLoaded += Init;
     }
     

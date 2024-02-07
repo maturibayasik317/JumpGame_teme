@@ -29,4 +29,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/taiyo/Scene/Stage3_Scene.unity
     guid: 8d41431f22e55ba4f8afb36bcd9147d8
+  - enabled: 1
+    path: Assets/Kaito/Scenes/TestStage_1.unity
+    guid: c5300b2a8911c754f919e686e1e320cf
+  - enabled: 1
+    path: Assets/Kaito/Scenes/TestStage_2.unity
+    guid: 59ca7f6b19948394981e979500242508
+  - enabled: 1
+    path: Assets/Kaito/Scenes/TestStage_3.unity
+    guid: 90f917a800954ee4cb3b55267eab7003
   m_configObjects: {}
