@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Jump_Dash : MonoBehaviour
 {   //プレイヤーにコンポーネントしてください
+
     private Vector2 velocity;
     private int JumpCount = 0;//ジャンプ終了時の処理
     private int DashCount = 0;//ダッシュ終了時の処理
@@ -21,9 +22,9 @@ public class Jump_Dash : MonoBehaviour
     public AudioSource jumpAudioSource;//ジャンプの音
     public AudioSource dashAudioSource;//ダッシュの音
 
+    //ジャンプとダッシュに使用
     Rigidbody2D rigid2D;
     [SerializeField] ContactFilter2D filter2D;
-
     private float dashElapsedTime = 0.0f;//ダッシュが始まってからの落下までの猶予
     private float fallElapsedTime = 0.0f; // 落下開始からの経過時間
     //[SerializeField] float Dash_Distance;//ダッシュ距離10~20ぐらいがオススメ
@@ -174,7 +175,6 @@ public class Jump_Dash : MonoBehaviour
         {
             //プレイヤーを消去
             Destroy(this.gameObject);
-            //ゲームオーバーテキストの表示
             //IwasaのところにPrefabとしてゲームオーバーテキストお用意したのでInspecterに入れてください
             text.SetActive(true);
             Debug.Log("ご臨終");
