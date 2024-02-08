@@ -28,6 +28,11 @@ public class CoinManager : MonoBehaviour
     }
     public GameSceneType gameSceneType;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         if (uiCanvas != null) // QÆƒGƒ‰[‰ñ”ğ
