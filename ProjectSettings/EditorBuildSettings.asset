@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/oyama/UnityChan2D/Demo/Scenes/World 1-1.unity
     guid: bc1bc11bd56944cb68646a65a5fff077
   - enabled: 1
+    path: Assets/Kaito/Scenes/Title_Scene.unity
+    guid: c62697233f33e2b469b1aeabd8e96ccc
+  - enabled: 1
     path: Assets/Kaito/Scenes/Select_Scene.unity
     guid: 4add1eee4964b014cad91e3b50b05387
   - enabled: 1

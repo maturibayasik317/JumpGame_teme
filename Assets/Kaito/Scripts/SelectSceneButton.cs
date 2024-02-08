@@ -12,6 +12,7 @@ public class SelectSceneButton : MonoBehaviour
         STAGE_1,
         STAGE_2,
         STAGE_3,
+        STAGE_4,
         COINRESET
     }
     [SerializeField] ButtonType buttonType;
@@ -34,16 +35,22 @@ public class SelectSceneButton : MonoBehaviour
         {
             case ButtonType.STAGE_1:
                 Debug.Log("ステージ1へ");
-                //SceneManager.LoadScene("TestStage_1");
-                SceneManager.LoadScene("Ren_Scene1");
+                SceneManager.LoadScene("TestStage_1");
+                // 本実装
+                //SceneManager.LoadScene("Ren_Scene1");
                 break;
             case ButtonType.STAGE_2:
-                //SceneManager.LoadScene("TestStage_2");
-                SceneManager.LoadScene("Stage2_Scene");
+                SceneManager.LoadScene("TestStage_2");
+                // 本実装
+                //SceneManager.LoadScene("Stage2_Scene");
                 break;
             case ButtonType.STAGE_3:
-                //SceneManager.LoadScene("TestStage_3");
-                SceneManager.LoadScene("Stage3_Scene");
+                SceneManager.LoadScene("TestStage_3");
+                // 本実装
+                //SceneManager.LoadScene("Stage3_Scene");
+                break;
+            case ButtonType.STAGE_4:
+                // ステージ4へ
                 break;
             case ButtonType.COINRESET:
                 CoinReset();
