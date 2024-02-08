@@ -145,7 +145,6 @@ public class Jump_Dash : MonoBehaviour
         if (fall)
         {
             Fall() ; 
-            Debug.Log("落下");
         }
 
         //動く床が参照されている時
@@ -178,6 +177,7 @@ public class Jump_Dash : MonoBehaviour
             //ゲームオーバーテキストの表示
             //IwasaのところにPrefabとしてゲームオーバーテキストお用意したのでInspecterに入れてください
             text.SetActive(true);
+            Debug.Log("ご臨終");
         }
 
         //ジャンプのオンオフについて使用
