@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //----ゲームシーンのコイン管理----
-public class CoinManager : MonoBehaviour
+public class CoinManager : SingletonMonoBehaviour<CoinManager>
 {
+    protected override bool dontDestroyOnLoad { get { return true; } }
+    
     [SerializeField] GameObject[] stageCoins; // ステージ上に配置するコイン
     [SerializeField] Sprite coinSprite; // コイン画像
     [SerializeField] Image[] coinImages; // UIとして表示するコイン
@@ -18,6 +20,9 @@ public class CoinManager : MonoBehaviour
     Coin coinScript;
     MainGameUI mainUIScript;
 
+    // プレイヤーがコインを保持しているか
+    [SerializeField]public bool[] Got = new bool[3];
+
     // どのシーンにいるか
     public enum GameSceneType
     {
@@ -28,13 +33,20 @@ public class CoinManager : MonoBehaviour
     }
     public GameSceneType gameSceneType;
 
-    private void Awake()
+    // シングルトン
+    static CoinManager instance;
+
+    void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        Got[0] = false;
+        Got[1] = false;
+        Got[2] = false;
+        CheckInstance();
     }
 
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
         if (uiCanvas != null) // 参照エラー回避
         {
             mainUIScript = uiCanvas.GetComponent<MainGameUI>();
@@ -42,8 +54,16 @@ public class CoinManager : MonoBehaviour
         coinScript = coinPrefab.GetComponent<Coin>();
     }
 
+
     void Update()
     {
+        if (!coinImages[0]) {
+            coinImages[0] = GameObject.Find("CoinImage").GetComponent<Image>();
+        }
+        if (Got[0]==false && !stageCoins[0])
+        {
+            stageCoins[0] = GameObject.Find("Coin");
+        }
         if (coinNumText != null) // 参照エラー回避
         {
             // ステージごとにコイン枚数を取得
@@ -68,6 +88,19 @@ public class CoinManager : MonoBehaviour
         ChangeSprite();
     }
 
+    // シングルトン
+    void CheckInstance()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // コイン画像に変更する
     void ChangeSprite()
     {
@@ -76,44 +109,21 @@ public class CoinManager : MonoBehaviour
         {
             if (!stageCoins[0])
             {
-                coinImages[0].sprite = coinSprite;
+                Got[0] = true;
             }
             if (!stageCoins[1])
             {
+                Got[1] = true;
                 coinImages[1].sprite = coinSprite;
             }
             if (!stageCoins[2])
             {
+                Got[2] = true;
                 coinImages[2].sprite = coinSprite;
+            }
+            if (Got[0]) { 
+                coinImages[0].sprite = coinSprite;
             }
         }
     }
-
-    //--------ステージごとの処理--------
-
-    // ステージセレクトでの処理
-    //void StageSelectCoin()
-    //{
-        
-    //}
-
-    //// ステージ1での処理
-    //void Stage_1Coin()
-    //{
-        
-    //}
-
-    //// ステージ2での処理
-    //void Stage_2Coin()
-    //{
-        
-    //}
-
-    //// ステージ3での処理
-    //void Stage_3Coin()
-    //{
-        
-    //}
-
-    //-------------------------------
 }
