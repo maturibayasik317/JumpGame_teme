@@ -34,16 +34,16 @@ public class SelectSceneButton : MonoBehaviour
         {
             case ButtonType.STAGE_1:
                 Debug.Log("ステージ1へ");
-                SceneManager.LoadScene("TestStage_1");
-                // 本実装 // SceneManager.LoadScene("Ren_Scene1");
+                //SceneManager.LoadScene("TestStage_1");
+                SceneManager.LoadScene("Ren_Scene1");
                 break;
             case ButtonType.STAGE_2:
-                SceneManager.LoadScene("TestStage_2");
-                // 本実装 // SceneManager.LoadScene("Stage2_Scene");
+                //SceneManager.LoadScene("TestStage_2");
+                SceneManager.LoadScene("Stage2_Scene");
                 break;
             case ButtonType.STAGE_3:
-                SceneManager.LoadScene("TestStage_3");
-                // 本実装 // SceneManager.LoadScene("Stage3_Scene");
+                //SceneManager.LoadScene("TestStage_3");
+                SceneManager.LoadScene("Stage3_Scene");
                 break;
             case ButtonType.COINRESET:
                 CoinReset();
@@ -59,6 +59,8 @@ public class SelectSceneButton : MonoBehaviour
         coinScript.PlayerCoin_Stage1 = 0;
         coinScript.PlayerCoin_Stage2 = 0;
         coinScript.PlayerCoin_Stage3 = 0;
+
+        coinScript.GetIsPlayer = false;
     }
 
     //// フェードイン・フェードアウト用
