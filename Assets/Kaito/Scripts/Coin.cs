@@ -16,8 +16,7 @@ public class Coin : MonoBehaviour
     static int getCoin_Stage1 = 0;
     static int getCoin_Stage2 = 0;
     static int getCoin_Stage3 = 0;
-
-    bool isPlayer = false; // プレイヤーが取得済みか判定
+    static int getCoin_Stage4 = 0;
 
     // プロパティ
     public int PlayerCoin_Stage1
@@ -35,11 +34,10 @@ public class Coin : MonoBehaviour
         get { return getCoin_Stage3; }
         set { getCoin_Stage3 = value; }
     }
-
-    public bool GetIsPlayer
+    public int PlayerCoin_Stage4
     {
-        get { return isPlayer; }
-        set { isPlayer = value; }
+        get { return getCoin_Stage4; }
+        set { getCoin_Stage4 = value; }
     }
 
     // コイン取得時の効果音
@@ -53,15 +51,6 @@ public class Coin : MonoBehaviour
         particle.Play();
         audioSource = GetComponent<AudioSource>();
         coinManagerScript = GameObject.Find("CoinManager").GetComponent<CoinManager>();
-
-        if (isPlayer) // すでに取得済みなら非表示
-        {
-            gameObject.SetActive(false);
-        }
-        else
-        {
-            gameObject.SetActive(true);
-        }
     }
 
     void Update()
@@ -73,7 +62,6 @@ public class Coin : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            isPlayer = true;
             StartCoroutine(CoinDestroy());
         }
     }
@@ -115,6 +103,11 @@ public class Coin : MonoBehaviour
         else if (coinManagerScript.gameSceneType == CoinManager.GameSceneType.STAGE_3)
         {
             getCoin_Stage3 += 1;
+        }
+        // ステージ４
+        else if (coinManagerScript.gameSceneType == CoinManager.GameSceneType.STAGE_4)
+        {
+            getCoin_Stage4 += 1;
         }
         
         Destroy(gameObject);

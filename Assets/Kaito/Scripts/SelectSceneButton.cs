@@ -66,8 +66,6 @@ public class SelectSceneButton : MonoBehaviour
         coinScript.PlayerCoin_Stage1 = 0;
         coinScript.PlayerCoin_Stage2 = 0;
         coinScript.PlayerCoin_Stage3 = 0;
-
-        coinScript.GetIsPlayer = false;
     }
 
     //// フェードイン・フェードアウト用
