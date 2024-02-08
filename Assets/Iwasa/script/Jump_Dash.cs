@@ -47,7 +47,6 @@ public class Jump_Dash : MonoBehaviour
         dash = true;
         dashElapsedTime = 0.0f;
         fallElapsedTime = 0.0f; // ダッシュが始まったので落下経過時間をリセット
-
         rigid2D.velocity = new Vector2(DashSpeed, 0);
         //DashSpeed = Dash_Distance / 0.5f;
         //rigid2D.velocity = new Vector2(DashSpeed, 0);
@@ -75,6 +74,12 @@ public class Jump_Dash : MonoBehaviour
         this.rigid2D = GetComponent<Rigidbody2D>();
         rigid2D.gravityScale = DefaultGravityScale;
     }
+    private void Start()
+    {
+        // ゲーム開始時には音声は再生しない
+        jumpAudioSource.Stop();
+        dashAudioSource.Stop();
+    }
     private void Update()
     {
         dashElapsedTime += Time.deltaTime; // フレームごとに経過時間を更新
@@ -100,7 +105,6 @@ public class Jump_Dash : MonoBehaviour
             jumpDuring = true;
             rigid2D.velocity = Vector2.zero;
             jumpVec =transform.up * Jump_Power;//引数を保存した変数に変更
-
             jumpAudioSource.Play();
 
             //ジャンプさせる
