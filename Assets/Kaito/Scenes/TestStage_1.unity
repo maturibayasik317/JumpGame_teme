@@ -238,6 +238,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coin
       objectReference: {fileID: 0}
+    - target: {fileID: 1356922986846728647, guid: 6d6e445e6a2eaf4479e03717818ca634, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7425153668473978336, guid: 6d6e445e6a2eaf4479e03717818ca634, type: 3}
       propertyPath: gameSceneType
       value: 1

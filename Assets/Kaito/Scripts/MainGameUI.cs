@@ -16,15 +16,15 @@ public class MainGameUI : MonoBehaviour
     public bool GetOnSelect => onSelect;
 
     [SerializeField] GameObject player;
-    //Jump_Dash playerScript; // 本実装
-    PlayerTest playerScript;
+    Jump_Dash playerScript; // 本実装
+    //PlayerTest playerScript;
 //----------リトライ・ゲームクリア（オーバー）----------
 
     void Start()
     {
         // 本実装
-        //playerScript = player.GetComponent<Jump_Dash>();
-        playerScript = player.GetComponent<PlayerTest>();
+        playerScript = player.GetComponent<Jump_Dash>();
+        //playerScript = player.GetComponent<PlayerTest>();
         
         gameClearImage.SetActive(false);
         gameOverImage.SetActive(false);
