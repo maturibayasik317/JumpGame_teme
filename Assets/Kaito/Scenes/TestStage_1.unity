@@ -1151,6 +1151,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 46048423}
     - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: gameSceneType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
       propertyPath: coinImages.Array.data[0]
       value: 
       objectReference: {fileID: 1095152755}

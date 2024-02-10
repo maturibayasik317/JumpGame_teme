@@ -46,8 +46,6 @@ public class PlayerTest : MonoBehaviour
         // ジャンプ処理
         if (jump && Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("jump");
-
 // ジャンプ処理部分に追記（変更）
 
             jumpDuring = true;

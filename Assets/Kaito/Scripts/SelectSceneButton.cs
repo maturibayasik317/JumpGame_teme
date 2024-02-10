@@ -19,6 +19,8 @@ public class SelectSceneButton : MonoBehaviour
 
     [SerializeField] GameObject coinPrefab;
     Coin coinScript;
+    [SerializeField] GameObject coinManager;
+    CoinManager coinManagerScript;
 
     void Start()
     {
@@ -26,6 +28,7 @@ public class SelectSceneButton : MonoBehaviour
         {
             coinScript = coinPrefab.GetComponent<Coin>();
         }
+        coinManagerScript = coinManager.GetComponent<CoinManager>();
     }
 
     // ボタンを押したときの処理（シーン遷移）
@@ -50,6 +53,7 @@ public class SelectSceneButton : MonoBehaviour
                 //SceneManager.LoadScene("Stage3_Scene");
                 break;
             case ButtonType.STAGE_4:
+                SceneManager.LoadScene("TestStage_4"); // 仮
                 // ステージ4へ
                 break;
             case ButtonType.COINRESET:
@@ -66,17 +70,24 @@ public class SelectSceneButton : MonoBehaviour
         coinScript.PlayerCoin_Stage1 = 0;
         coinScript.PlayerCoin_Stage2 = 0;
         coinScript.PlayerCoin_Stage3 = 0;
+        coinScript.PlayerCoin_Stage4 = 0;
+
+        // 取得状態をリセット
+        for (int i = 0; i < coinManagerScript.IsPlaerCoin_Stage1.Length; i++)
+        {
+            coinManagerScript.IsPlaerCoin_Stage1[i] = false;
+        }
+        for (int i = 0; i < coinManagerScript.IsPlaerCoin_Stage2.Length; i++)
+        {
+            coinManagerScript.IsPlaerCoin_Stage1[i] = false;
+        }
+        for (int i = 0; i < coinManagerScript.IsPlaerCoin_Stage3.Length; i++)
+        {
+            coinManagerScript.IsPlaerCoin_Stage1[i] = false;
+        }
+        for (int i = 0; i < coinManagerScript.IsPlaerCoin_Stage4.Length; i++)
+        {
+            coinManagerScript.IsPlaerCoin_Stage1[i] = false;
+        }
     }
-
-    //// フェードイン・フェードアウト用
-    //[SerializeField] GameObject fadePanel;
-    //[SerializeField] float fadeWaitTime;
-    //GameObject fadeCanvasClone;
-    //FadeCanvas fadeScript;
-    ////
-
-    //IEnumerator Fade()
-    //{
-
-    //}
 }
