@@ -28,6 +28,8 @@ public class SelectSceneButton : MonoBehaviour
         {
             coinScript = coinPrefab.GetComponent<Coin>();
         }
+        
+        coinManager = GameObject.Find("CoinManager");
         coinManagerScript = coinManager.GetComponent<CoinManager>();
     }
 
