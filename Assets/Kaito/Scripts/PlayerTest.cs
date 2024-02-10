@@ -136,7 +136,7 @@ public class PlayerTest : MonoBehaviour
         }
         //
 
-        if (collision.gameObject.CompareTag("HitBox"))
+        if (collision.gameObject.CompareTag("HitBox") || collision.gameObject.CompareTag("Enemy"))
         {
             Destroy(gameObject);
             Debug.Log("ゲームオーバー");

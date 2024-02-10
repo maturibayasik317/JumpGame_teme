@@ -17,6 +17,7 @@ public class Coin : MonoBehaviour
     static int getCoin_Stage2 = 0;
     static int getCoin_Stage3 = 0;
     static int getCoin_Stage4 = 0;
+    //static bool isActive = true; // すべて消えてしまう
 
     // プロパティ
     public int PlayerCoin_Stage1
@@ -39,6 +40,11 @@ public class Coin : MonoBehaviour
         get { return getCoin_Stage4; }
         set { getCoin_Stage4 = value; }
     }
+    //public bool IsActive
+    //{
+    //    get { return isActive; }
+    //    set { isActive = value; }
+    //}
 
     // コイン取得時の効果音
     [SerializeField] AudioClip sound;
@@ -51,6 +57,11 @@ public class Coin : MonoBehaviour
         particle.Play();
         audioSource = GetComponent<AudioSource>();
         coinManagerScript = GameObject.Find("CoinManager").GetComponent<CoinManager>();
+        
+        //if (!isActive) // すでに取得済みなら
+        //{
+        //    gameObject.SetActive(false);
+        //}
     }
 
     void Update()
@@ -109,7 +120,8 @@ public class Coin : MonoBehaviour
         {
             getCoin_Stage4 += 1;
         }
-        
+
+        //isActive = false;
         Destroy(gameObject);
     }
 

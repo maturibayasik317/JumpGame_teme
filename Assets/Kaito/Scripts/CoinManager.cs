@@ -66,25 +66,28 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
     void Awake()
     {
         CheckInstance();
-        SceneCheck();
     }
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
-
+        DontDestroyOnLoad(gameObject); // シーンが変わっても存在する
         coinScript = coinPrefab.GetComponent<Coin>();
+        
+        // シーンのロードが完了すると検出されるイベント
+        SceneManager.sceneLoaded += SceneCheck;
     }
 
 
     void Update()
     {
+        //SceneCheck(); // Update内じゃないと「GameSceneType」が変わらない
+
         // (DontDestroyOnLoadのケア)
         // タイトル画面とステージ選択画面以外で、コインテキストが参照されていないとき
-        if ((gameSceneType != GameSceneType.Title_Scene 
+        if ((gameSceneType != GameSceneType.Title_Scene
             || gameSceneType != GameSceneType.STAGE_SELECT) && coinNumText == null)
         {
-            // テキストのみを取得
+            // テキストのみを取得(Update内じゃないとテキストを取得できない)
             coinNumText = GameObject.Find("CoinNumText").GetComponent<Text>();
         }
 
@@ -126,7 +129,7 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
     }
 
     // どのシーンにいるか
-    void SceneCheck()
+    void SceneCheck(Scene nextScene, LoadSceneMode mode)
     {
         // 現在のシーン番号を取得
         currentScene = SceneManager.GetActiveScene().buildIndex;
