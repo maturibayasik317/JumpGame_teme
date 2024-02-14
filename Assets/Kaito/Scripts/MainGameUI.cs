@@ -12,20 +12,20 @@ public class MainGameUI : MonoBehaviour
     [SerializeField] GameObject gameClearImage;
     [SerializeField] GameObject gameOverImage;
     [SerializeField] GameObject selectButton; // ステージ選択ボタン
-    bool onSelect = false;
-    public bool GetOnSelect => onSelect;
     [SerializeField] GameObject titleButton; // タイトルボタン
 
     [SerializeField] GameObject player;
-    //Jump_Dash playerScript; // 本実装
-    PlayerTest playerScript;
+    [SerializeField] ParticleSystem clearParticle;
+
+    Jump_Dash playerScript; // 本実装
+    //PlayerTest playerScript; // テスト
 //----------リトライ・ゲームクリア（オーバー）----------
 
     void Start()
     {
         // 本実装
-        //playerScript = player.GetComponent<Jump_Dash>();
-        playerScript = player.GetComponent<PlayerTest>();
+        playerScript = player.GetComponent<Jump_Dash>();
+        //playerScript = player.GetComponent<PlayerTest>();
         
         gameClearImage.SetActive(false);
         gameOverImage.SetActive(false);
@@ -51,7 +51,6 @@ public class MainGameUI : MonoBehaviour
     // セレクトボタンを押したとき
     public void Select()
     {
-        onSelect = true;
         SceneManager.LoadScene("Select_Scene");
     }
 
@@ -77,6 +76,20 @@ public class MainGameUI : MonoBehaviour
             selectButton.SetActive(true);
             gameClearImage.SetActive(true);
             titleButton.SetActive(true);
+
+            StartCoroutine(ClearEffect());
+        }
+    }
+
+    // クリア演出
+    IEnumerator ClearEffect()
+    {
+        if (clearParticle != null) // 参照エラー回避
+        {
+            clearParticle.Play();
+            yield return new WaitForSeconds(clearParticle.main.duration);
+            //「duration」秒後にストップ
+            Destroy(clearParticle);
         }
     }
 }

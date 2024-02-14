@@ -375,7 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3b44d0ffd996d1419f50b2f60ae7910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonType: 3
+  buttonType: 4
   coinPrefab: {fileID: 1356922986846728647, guid: 6d6e445e6a2eaf4479e03717818ca634, type: 3}
 --- !u!1 &2342203025756111411
 GameObject:
@@ -2074,7 +2074,7 @@ GameObject:
   - component: {fileID: 6355278347509471931}
   - component: {fileID: 7523647565341750931}
   - component: {fileID: 597580831138154089}
-  - component: {fileID: 3329716996698056012}
+  - component: {fileID: 1268724834722670482}
   m_Layer: 5
   m_Name: StageSelectCanvas
   m_TagString: UI
@@ -2167,7 +2167,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3329716996698056012
+--- !u!114 &1268724834722670482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2176,9 +2176,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 8698145722532790409}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a9d8c3331b83f24eb18fcc18fd49684, type: 3}
+  m_Script: {fileID: 11500000, guid: 8bccc5b62c064b54ab10f8906b66de06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinImages:
+  - {fileID: 8932662150717818406}
+  - {fileID: 8198816383198391447}
+  - {fileID: 794649276943712723}
+  - {fileID: 556984752142430053}
+  - {fileID: 6895119160682930785}
+  - {fileID: 8779928197700245845}
+  - {fileID: 8286957002627168576}
+  - {fileID: 2061881542569913004}
+  - {fileID: 4064101438075124441}
+  - {fileID: 3906394703768906979}
+  - {fileID: 1956306390810315496}
+  - {fileID: 5994011625793020616}
+  coinSprite: {fileID: 21300000, guid: 695fb51ed22795344846dea0e5cd4583, type: 3}
 --- !u!1 &8827420105135497806
 GameObject:
   m_ObjectHideFlags: 0

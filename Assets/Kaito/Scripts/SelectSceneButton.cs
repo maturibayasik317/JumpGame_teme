@@ -66,29 +66,27 @@ public class SelectSceneButton : MonoBehaviour
     // 全ステージのコイン枚数をリセット
     void CoinReset()
     {
-        //coinScript.IsActive = true; // 全コインを出現させる(すべて消えてしまう)
-
         coinScript.PlayerCoin_Stage1 = 0;
         coinScript.PlayerCoin_Stage2 = 0;
         coinScript.PlayerCoin_Stage3 = 0;
         coinScript.PlayerCoin_Stage4 = 0;
 
         // 取得状態をリセット
-        for (int i = 0; i < coinManagerScript.IsPlaerCoin_Stage1.Length; i++)
+        for (int i = 0; i < coinManagerScript.IsPlayerCoin_Stage1.Length; i++)
         {
-            coinManagerScript.IsPlaerCoin_Stage1[i] = false;
+            coinManagerScript.IsPlayerCoin_Stage1[i] = false;
         }
-        for (int i = 0; i < coinManagerScript.IsPlaerCoin_Stage2.Length; i++)
+        for (int i = 0; i < coinManagerScript.IsPlayerCoin_Stage2.Length; i++)
         {
-            coinManagerScript.IsPlaerCoin_Stage2[i] = false;
+            coinManagerScript.IsPlayerCoin_Stage2[i] = false;
         }
-        for (int i = 0; i < coinManagerScript.IsPlaerCoin_Stage3.Length; i++)
+        for (int i = 0; i < coinManagerScript.IsPlayerCoin_Stage3.Length; i++)
         {
-            coinManagerScript.IsPlaerCoin_Stage3[i] = false;
+            coinManagerScript.IsPlayerCoin_Stage3[i] = false;
         }
-        for (int i = 0; i < coinManagerScript.IsPlaerCoin_Stage4.Length; i++)
+        for (int i = 0; i < coinManagerScript.IsPlayerCoin_Stage4.Length; i++)
         {
-            coinManagerScript.IsPlaerCoin_Stage4[i] = false;
+            coinManagerScript.IsPlayerCoin_Stage4[i] = false;
         }
     }
 }

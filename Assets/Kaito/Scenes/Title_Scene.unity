@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac62717b29260040a64c163a5ee4ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageSelectButton: {fileID: 0}
+  stageSelectButton: {fileID: 1488216497}
 --- !u!114 &71887476
 MonoBehaviour:
   m_ObjectHideFlags: 0

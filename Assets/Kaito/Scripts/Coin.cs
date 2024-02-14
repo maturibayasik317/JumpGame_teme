@@ -17,7 +17,6 @@ public class Coin : MonoBehaviour
     static int getCoin_Stage2 = 0;
     static int getCoin_Stage3 = 0;
     static int getCoin_Stage4 = 0;
-    //static bool isActive = true; // すべて消えてしまう
 
     // プロパティ
     public int PlayerCoin_Stage1
@@ -40,11 +39,6 @@ public class Coin : MonoBehaviour
         get { return getCoin_Stage4; }
         set { getCoin_Stage4 = value; }
     }
-    //public bool IsActive
-    //{
-    //    get { return isActive; }
-    //    set { isActive = value; }
-    //}
 
     // コイン取得時の効果音
     [SerializeField] AudioClip sound;
@@ -57,11 +51,6 @@ public class Coin : MonoBehaviour
         particle.Play();
         audioSource = GetComponent<AudioSource>();
         coinManagerScript = GameObject.Find("CoinManager").GetComponent<CoinManager>();
-        
-        //if (!isActive) // すでに取得済みなら
-        //{
-        //    gameObject.SetActive(false);
-        //}
     }
 
     void Update()
@@ -121,56 +110,6 @@ public class Coin : MonoBehaviour
             getCoin_Stage4 += 1;
         }
 
-        //isActive = false;
         Destroy(gameObject);
     }
-
-
-    //-------static変数の初期化用関数-------
-    //static Coin()
-    //{
-    //    SceneManager.sceneLoaded += Init;
-    //}
-
-    //// シーンが読み込まれたとき、コインの取得数を初期化
-    //static void Init(Scene loadingScene, LoadSceneMode loadSceneMode)
-    //{
-    //    getCoin = 0;
-    //}
-    //---------------------------------------
-
-    //// ステージセレクト画面で表示されるコイン取得数
-    //static int stageCoinNum;
-    //public int GetStageCoinNum => stageCoinNum;
-
-    //// どのシーンのコインか
-    //enum GameSceneType
-    //{
-    //    STAGE_SELECT,
-    //    STAGE_1,
-    //    STAGE_2,
-    //    STAGE_3
-    //}
-    //[SerializeField] GameSceneType gameSceneType;
-
-    //void CoinState()
-    //{
-    //// ステージごとにコイン数を取得
-    //switch (gameSceneType)
-    //{
-    //    case GameSceneType.STAGE_SELECT:
-    //        // 初期化処理
-    //        //StageSelectCoin();
-    //        break;
-    //    case GameSceneType.STAGE_1:
-    //        //Stage_1Coin();
-    //        break;
-    //    case GameSceneType.STAGE_2:
-    //        //Stage_2Coin();
-    //        break;
-    //    case GameSceneType.STAGE_3:
-    //        //Stage_3Coin();
-    //        break;
-    //}
-    //}
 }
