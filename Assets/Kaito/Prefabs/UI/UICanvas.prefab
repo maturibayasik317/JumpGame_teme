@@ -130,6 +130,8 @@ MonoBehaviour:
   selectButton: {fileID: 7256598708144405564}
   titleButton: {fileID: 4131755932658312662}
   player: {fileID: 0}
+  clearParticle: {fileID: 0}
+  effectTime: 2
 --- !u!1 &1027103758685214436
 GameObject:
   m_ObjectHideFlags: 0

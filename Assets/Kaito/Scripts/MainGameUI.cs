@@ -16,6 +16,7 @@ public class MainGameUI : MonoBehaviour
 
     [SerializeField] GameObject player;
     [SerializeField] ParticleSystem clearParticle;
+    [SerializeField] float effectTime;
 
     Jump_Dash playerScript; // 本実装
     //PlayerTest playerScript; // テスト
@@ -87,8 +88,9 @@ public class MainGameUI : MonoBehaviour
         if (clearParticle != null) // 参照エラー回避
         {
             clearParticle.Play();
-            yield return new WaitForSeconds(clearParticle.main.duration);
-            //「duration」秒後にストップ
+            float stopTime = clearParticle.main.duration + effectTime;
+            yield return new WaitForSeconds(stopTime);
+            //「duration」 + 「effectTime」秒後にストップさせる
             Destroy(clearParticle);
         }
     }

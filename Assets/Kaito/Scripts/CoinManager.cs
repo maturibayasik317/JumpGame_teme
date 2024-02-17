@@ -81,14 +81,6 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
 
     void Update()
     {
-        // タイトル画面とステージ選択画面以外で
-        if (gameSceneType != GameSceneType.Title_Scene
-            && gameSceneType != GameSceneType.STAGE_SELECT)
-        {
-            // (DontDestroyOnLoadのケア)
-            // コインテキストが参照されていないとき
-            coinNumText = GameObject.Find("CoinNumText").GetComponent<Text>();
-        }
         // ステージごとにコイン枚数を取得
         switch (gameSceneType)
         {
@@ -165,6 +157,15 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
                 gameSceneType = GameSceneType.STAGE_4;
                 Debug.Log($"シーンタイプ：{gameSceneType}");
                 break;
+        }
+
+        // タイトル画面とステージ選択画面以外で
+        if (gameSceneType != GameSceneType.Title_Scene
+            && gameSceneType != GameSceneType.STAGE_SELECT)
+        {
+            // (DontDestroyOnLoadのケア)
+            // コインテキストが参照されていないとき
+            coinNumText = GameObject.Find("CoinNumText").GetComponent<Text>();
         }
     }
 
