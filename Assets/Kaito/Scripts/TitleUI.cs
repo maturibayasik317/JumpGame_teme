@@ -8,9 +8,25 @@ public class TitleUI : MonoBehaviour
 {
     [SerializeField] GameObject stageSelectButton;
 
-    // ステージ選択画面へ
+    // ボタン押下時の効果音用
+    AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = stageSelectButton.GetComponent<AudioSource>();
+    }
+
     public void StageSelect()
     {
+        StartCoroutine(SceneChange_Select());
+    }
+
+    // ステージ選択画面へ
+    IEnumerator SceneChange_Select()
+    {
+        audioSource.PlayOneShot(audioSource.clip);
+        yield return new WaitForSeconds(0.5f);
+        // 音が鳴ってから
         SceneManager.LoadScene("Select_Scene");
     }
 }

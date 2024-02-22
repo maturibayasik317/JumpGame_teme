@@ -40,8 +40,7 @@ public class Coin : MonoBehaviour
         set { getCoin_Stage4 = value; }
     }
 
-    // コイン取得時の効果音
-    [SerializeField] AudioClip sound;
+    // コイン取得時の効果音用
     AudioSource audioSource;
 
     CoinManager coinManagerScript;
@@ -84,7 +83,7 @@ public class Coin : MonoBehaviour
     // コイン取得時の処理
     IEnumerator CoinDestroy()
     {
-        audioSource.PlayOneShot(sound); // soundを1回鳴らす
+        audioSource.PlayOneShot(audioSource.clip); // soundを1回鳴らす
         particle.Stop();
 
         yield return new WaitForSeconds(0.8f);

@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class MainGameUI : MonoBehaviour
 {
 //----------リトライ・ゲームクリア（オーバー）等----------
-    [SerializeField] GameObject retryButton;
+    [SerializeField] GameObject retryButton; // リトライボタン
     [SerializeField] GameObject gameClearImage;
     [SerializeField] GameObject gameOverImage;
     [SerializeField] GameObject selectButton; // ステージ選択ボタン
@@ -22,12 +22,21 @@ public class MainGameUI : MonoBehaviour
     //PlayerTest playerScript; // テスト
 //----------リトライ・ゲームクリア（オーバー）----------
 
+    // ボタン押下時の効果音用
+    AudioSource retryAudioSource;
+    AudioSource selectAudioSource;
+    AudioSource titleAudioSource;
+
     void Start()
     {
         // 本実装
         playerScript = player.GetComponent<Jump_Dash>();
         //playerScript = player.GetComponent<PlayerTest>();
-        
+
+        retryAudioSource = retryButton.GetComponent<AudioSource>();
+        selectAudioSource = selectButton.GetComponent<AudioSource>();
+        titleAudioSource = titleButton.GetComponent<AudioSource>();
+
         gameClearImage.SetActive(false);
         gameOverImage.SetActive(false);
         retryButton.SetActive(false);
@@ -45,20 +54,19 @@ public class MainGameUI : MonoBehaviour
     // リトライボタンを押したとき
     public void Retry()
     {
-        // 現在開いているシーンを再読み込み
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        StartCoroutine(SceneRetry());
     }
 
     // セレクトボタンを押したとき
     public void Select()
     {
-        SceneManager.LoadScene("Select_Scene");
+        StartCoroutine(SceneChange_Select());
     }
 
     // タイトルボタンを押したとき
     public void Title()
     {
-        SceneManager.LoadScene("Title_Scene");
+        StartCoroutine(SceneChange_Title());
     }
 
     // テキスト、ボタン関連の表示・非表示
@@ -94,5 +102,33 @@ public class MainGameUI : MonoBehaviour
             //「duration」 + 「effectTime」秒後にストップさせる
             Destroy(clearParticle);
         }
+    }
+
+
+    // リトライ
+    IEnumerator SceneRetry()
+    {
+        Debug.Log(retryAudioSource);
+        retryAudioSource.PlayOneShot(retryAudioSource.clip);
+        yield return new WaitForSeconds(0.5f);
+        // 音が鳴ってから
+        // 現在開いているシーンを再読み込み
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    // ステージ選択画面へ
+    IEnumerator SceneChange_Select()
+    {
+        selectAudioSource.PlayOneShot(selectAudioSource.clip);
+        yield return new WaitForSeconds(0.5f);
+        // 音が鳴ってから
+        SceneManager.LoadScene("Select_Scene");
+    }
+    // タイトル画面へ
+    IEnumerator SceneChange_Title()
+    {
+        titleAudioSource.PlayOneShot(titleAudioSource.clip);
+        yield return new WaitForSeconds(0.5f);
+        // 音が鳴ってから
+        SceneManager.LoadScene("Title_Scene");
     }
 }
