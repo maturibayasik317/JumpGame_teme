@@ -90,6 +90,7 @@ public class MainGameUI : MonoBehaviour
             clearParticle.Play();
             float stopTime = clearParticle.main.duration + effectTime;
             yield return new WaitForSeconds(stopTime);
+
             //「duration」 + 「effectTime」秒後にストップさせる
             Destroy(clearParticle);
         }
