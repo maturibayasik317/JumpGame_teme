@@ -8617,6 +8617,7 @@ MonoBehaviour:
   FallSpeed: 1
   DefaultGravityScale: 10
   DashSpeed: 10
+  anim: {fileID: 0}
 --- !u!50 &1725177745
 Rigidbody2D:
   serializedVersion: 4
