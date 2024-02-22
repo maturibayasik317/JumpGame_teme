@@ -510,7 +510,6 @@ GameObject:
   m_Component:
   - component: {fileID: 52634975}
   - component: {fileID: 52634978}
-  - component: {fileID: 52634977}
   - component: {fileID: 52634976}
   m_Layer: 0
   m_Name: Main Camera
@@ -533,7 +532,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 64499444}
-  - {fileID: 1913673114}
   m_Father: {fileID: 1365348411}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &52634976
@@ -548,14 +546,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036446dc405dbf440bb30ea6330ddaba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!81 &52634977
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 52634974}
-  m_Enabled: 1
 --- !u!20 &52634978
 Camera:
   m_ObjectHideFlags: 0
@@ -1152,7 +1142,7 @@ Transform:
   m_GameObject: {fileID: 162569653}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: -3.3688455, y: -12.520736, z: -0.17563146}
+  m_LocalPosition: {x: -0.15, y: 0.47, z: 19.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1844,6 +1834,7 @@ GameObject:
   m_Component:
   - component: {fileID: 603500116}
   - component: {fileID: 603500115}
+  - component: {fileID: 603500117}
   m_Layer: 0
   m_Name: FallingHitbox
   m_TagString: HitBox
@@ -1908,9 +1899,18 @@ Transform:
   m_LocalPosition: {x: -0.037395477, y: -8, z: 0.21917087}
   m_LocalScale: {x: 100, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1913673114}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &603500117
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603500114}
+  m_Enabled: 1
 --- !u!1 &615487204
 GameObject:
   m_ObjectHideFlags: 0
@@ -4953,11 +4953,11 @@ Transform:
   m_GameObject: {fileID: 1913673113}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.00037395477, y: 8.61, z: -36.78079}
+  m_LocalScale: {x: 0.01, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 52634975}
+  m_Father: {fileID: 603500116}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1913673115
 AudioSource:
