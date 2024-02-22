@@ -43,6 +43,9 @@ public class Jump_Dash : MonoBehaviour
     bool jumpDuring = false;//ジャンプ中かどうか
     MovingFloor floorScript = null;
 
+    // Animation
+    [SerializeField] Animator anim;
+
     void MoveDash()//ジャンプ中にSpeace押した時のダッシュ処理
     {
         dash = true;
@@ -52,6 +55,8 @@ public class Jump_Dash : MonoBehaviour
         //DashSpeed = Dash_Distance / 0.5f;
         //rigid2D.velocity = new Vector2(DashSpeed, 0);
 
+        anim.SetTrigger("Dash");
+
         rigid2D.gravityScale = 0.0f;
         dashAudioSource.Play();
         Debug.Log ("横移動");
@@ -60,6 +65,7 @@ public class Jump_Dash : MonoBehaviour
     //落下処理
     void Fall()
     {
+        anim.SetTrigger("Fall");
         rigid2D.velocity = new Vector2(0, rigid2D.velocity.y);
         rigid2D.gravityScale = DefaultGravityScale;
         Debug.Log("落下");
@@ -103,6 +109,7 @@ public class Jump_Dash : MonoBehaviour
 
         if (jump)
         { 
+            anim.SetTrigger("Jump");
             jumpDuring = true;
             rigid2D.velocity = Vector2.zero;
             jumpVec =transform.up * Jump_Power;//引数を保存した変数に変更
@@ -183,6 +190,7 @@ public class Jump_Dash : MonoBehaviour
         //ジャンプのオンオフについて使用
         if (other.gameObject.tag == "Ground" || other.gameObject.tag == "MoveFloor")
         {
+            anim.SetTrigger("Move");
             isground = true;
             dash = false;
             fall = false;
