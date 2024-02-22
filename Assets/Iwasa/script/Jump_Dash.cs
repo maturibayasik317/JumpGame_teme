@@ -111,6 +111,7 @@ public class Jump_Dash : MonoBehaviour
         { 
             anim.SetTrigger("Jump");
             jumpDuring = true;
+            rigid2D.gravityScale = DefaultGravityScale;
             rigid2D.velocity = Vector2.zero;
             jumpVec =transform.up * Jump_Power;//引数を保存した変数に変更
             jumpAudioSource.Play();
@@ -199,8 +200,7 @@ public class Jump_Dash : MonoBehaviour
             fallElapsedTime = 0.0f;
             //地面に着地したらダッシュを停止
             rigid2D.velocity = new Vector2(0, rigid2D.velocity.y);
-
-            if(other.gameObject.tag == "MoveFloor") 
+            if (other.gameObject.tag == "MoveFloor") 
             {
                 floorScript = other.gameObject.GetComponent<MovingFloor>();
                 onMoveFloor = true;
