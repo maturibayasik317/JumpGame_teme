@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 214551326}
   - component: {fileID: 214551325}
   m_Layer: 0
-  m_Name: MicrosoftTeams-image
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
