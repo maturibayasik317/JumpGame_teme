@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Ren/Ren/Scenes/Ren_Scene1.unity
     guid: 65e1f3abcf4305e4199ae1fd57bec116
   - enabled: 1
+    path: Assets/Ren/Ren/Scenes/Player_test_ren.unity
+    guid: 56c0a344064e8074b908852ad71f587d
+  - enabled: 1
     path: Assets/taiyo/Scene/Stage2_Scene.unity
     guid: 5fb43684e2b057c43a5e5dc4cdb10f45
   - enabled: 1
@@ -41,7 +44,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Kaito/Scenes/TestStage_3.unity
     guid: 90f917a800954ee4cb3b55267eab7003
-  - enabled: 1
+  - enabled: 0
     path: Assets/Kaito/Scenes/TestStage_4.unity
     guid: ba972fe527e92e4468b29a2185bec83c
   m_configObjects: {}

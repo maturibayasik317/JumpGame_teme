@@ -350,7 +350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
       propertyPath: coinImages.Array.size
-      value: 9
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
       propertyPath: coinImages.Array.data[0]
@@ -388,6 +388,18 @@ PrefabInstance:
       propertyPath: coinImages.Array.data[8]
       value: 
       objectReference: {fileID: 2076633327}
+    - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: coinImages.Array.data[9]
+      value: 
+      objectReference: {fileID: 327684034}
+    - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: coinImages.Array.data[10]
+      value: 
+      objectReference: {fileID: 1745204640}
+    - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
+      propertyPath: coinImages.Array.data[11]
+      value: 
+      objectReference: {fileID: 1314172505}
     - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
       propertyPath: stageSelectCoinImages.Array.size
       value: 12
