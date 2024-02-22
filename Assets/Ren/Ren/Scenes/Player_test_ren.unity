@@ -3551,7 +3551,7 @@ Animator:
   m_GameObject: {fileID: 1365348403}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 16b8b39194d751642b5135ca28604516, type: 2}
+  m_Controller: {fileID: 9100000, guid: e6e1e7e67efea6447bb0b02b7c3c79ac, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4969,7 +4969,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e84c63663f80e5248b67836942cedc4a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 13f23add976de7d439ca89629e11350d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
