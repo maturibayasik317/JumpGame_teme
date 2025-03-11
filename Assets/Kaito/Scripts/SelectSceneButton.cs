@@ -1,9 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//----ステージを選択するボタン----
+/// <summary>
+/// ステージを選択するボタンクラス
+/// </summary>
 public class SelectSceneButton : MonoBehaviour
 {
     // ボタンの種類（どのステージに対応しているか）
@@ -35,41 +36,44 @@ public class SelectSceneButton : MonoBehaviour
         coinManagerScript = GameObject.Find("CoinManager").GetComponent<CoinManager>();
     }
 
-    // ボタンを押したとき
+    /// <summary>
+    /// 各ステージのボタンを押したら呼ばれる関数
+    /// </summary>
     public void StageButton()
     {
         StartCoroutine(Button());
     }
 
-    // ボタン毎の処理内容（シーン遷移）
+    /// <summary>
+    /// 押したボタンごとに別のシーンに遷移する関数
+    /// </summary>
+    /// <returns></returns>
     IEnumerator Button()
     {
+        const float WAIT_TIME = 0.5f;
+
         switch (buttonType)
         {
             case ButtonType.STAGE_1:
-                Debug.Log("ステージ1へ");
                 audioSource.PlayOneShot(audioSource.clip);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(WAIT_TIME);
                 // 音が鳴ってから
-                SceneManager.LoadScene("Ren_Scene1");
+                SceneManager.LoadScene("Stage_1");
                 break;
             case ButtonType.STAGE_2:
                 audioSource.PlayOneShot(audioSource.clip);
-                yield return new WaitForSeconds(0.5f);
-                // 音が鳴ってから
-                SceneManager.LoadScene("Player_test_ren");
+                yield return new WaitForSeconds(WAIT_TIME);
+                SceneManager.LoadScene("Stage_2");
                 break;
             case ButtonType.STAGE_3:
                 audioSource.PlayOneShot(audioSource.clip);
-                yield return new WaitForSeconds(0.5f);
-                // 音が鳴ってから
-                SceneManager.LoadScene("Stage2_Scene");
+                yield return new WaitForSeconds(WAIT_TIME);
+                SceneManager.LoadScene("Stage_3");
                 break;
             case ButtonType.STAGE_4:
                 audioSource.PlayOneShot(audioSource.clip);
-                yield return new WaitForSeconds(0.5f);
-                // 音が鳴ってから
-                SceneManager.LoadScene("Stage3_Scene");
+                yield return new WaitForSeconds(WAIT_TIME);
+                SceneManager.LoadScene("Stage_4");
                 break;
             case ButtonType.COINRESET:
                 audioSource.PlayOneShot(audioSource.clip);
@@ -78,7 +82,9 @@ public class SelectSceneButton : MonoBehaviour
         }
     }
 
-    // 全ステージのコイン枚数をリセット
+    /// <summary>
+    /// 全ステージのコイン枚数をリセット関数
+    /// </summary>
     void CoinReset()
     {
         coinScript.PlayerCoin_Stage1 = 0;

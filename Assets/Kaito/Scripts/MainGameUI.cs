@@ -1,13 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-//----ゲームシーンでのUI系のスクリプト----
+/// <summary>
+/// ゲームシーンでのUIを制御するクラス
+/// </summary>
 public class MainGameUI : MonoBehaviour
 {
-//----------リトライ・ゲームクリア（オーバー）等----------
+    const float WAIT_TIME = 0.5f;
+
+//----------リトライ・ゲームクリア（オーバー）----------
     [SerializeField] GameObject retryButton; // リトライボタン
     [SerializeField] GameObject gameClearImage;
     [SerializeField] GameObject gameOverImage;
@@ -18,8 +20,7 @@ public class MainGameUI : MonoBehaviour
     [SerializeField] ParticleSystem clearParticle;
     [SerializeField] float effectTime;
 
-    Jump_Dash playerScript; // 本実装
-    //PlayerTest playerScript; // テスト
+    Jump_Dash playerScript;
 //----------リトライ・ゲームクリア（オーバー）----------
 
     // ボタン押下時の効果音用
@@ -29,9 +30,7 @@ public class MainGameUI : MonoBehaviour
 
     void Start()
     {
-        // 本実装
         playerScript = player.GetComponent<Jump_Dash>();
-        //playerScript = player.GetComponent<PlayerTest>();
 
         retryAudioSource = retryButton.GetComponent<AudioSource>();
         selectAudioSource = selectButton.GetComponent<AudioSource>();
@@ -70,6 +69,9 @@ public class MainGameUI : MonoBehaviour
     }
 
     // テキスト、ボタン関連の表示・非表示
+    /// <summary>
+    /// テキスト、ボタンの表示・非表示を行う関数
+    /// </summary>
     void TextAndButton()
     {
         if (player == null)
@@ -90,7 +92,10 @@ public class MainGameUI : MonoBehaviour
         }
     }
 
-    // クリア演出
+    /// <summary>
+    /// クリア演出を行う関数
+    /// </summary>
+    /// <returns></returns>
     IEnumerator ClearEffect()
     {
         if (clearParticle != null) // 参照エラー回避
@@ -98,37 +103,43 @@ public class MainGameUI : MonoBehaviour
             clearParticle.Play();
             float stopTime = clearParticle.main.duration + effectTime;
             yield return new WaitForSeconds(stopTime);
-
-            //「duration」 + 「effectTime」秒後にストップさせる
             Destroy(clearParticle);
         }
     }
 
-
-    // リトライ
+    /// <summary>
+    /// リトライを行う関数
+    /// </summary>
+    /// <returns></returns>
     IEnumerator SceneRetry()
     {
         Debug.Log(retryAudioSource);
         retryAudioSource.PlayOneShot(retryAudioSource.clip);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(WAIT_TIME);
         // 音が鳴ってから
-        // 現在開いているシーンを再読み込み
+        // 現在のシーンを再読み込み
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    // ステージ選択画面へ
+
+    /// <summary>
+    /// ステージ選択画面へ遷移する関数
+    /// </summary>
+    /// <returns></returns>
     IEnumerator SceneChange_Select()
     {
         selectAudioSource.PlayOneShot(selectAudioSource.clip);
-        yield return new WaitForSeconds(0.5f);
-        // 音が鳴ってから
-        SceneManager.LoadScene("Select_Scene");
+        yield return new WaitForSeconds(WAIT_TIME);
+        SceneManager.LoadScene("StageSelect");
     }
-    // タイトル画面へ
+
+    /// <summary>
+    /// タイトル画面へ遷移する関数
+    /// </summary>
+    /// <returns></returns>
     IEnumerator SceneChange_Title()
     {
         titleAudioSource.PlayOneShot(titleAudioSource.clip);
-        yield return new WaitForSeconds(0.5f);
-        // 音が鳴ってから
-        SceneManager.LoadScene("Title_Scene");
+        yield return new WaitForSeconds(WAIT_TIME);
+        SceneManager.LoadScene("Title");
     }
 }

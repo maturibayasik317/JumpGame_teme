@@ -1,9 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//-----タイトル画面UI-----
+/// <summary>
+/// タイトル画面のボタンUIを制御するクラス
+/// </summary>
 public class TitleUI : MonoBehaviour
 {
     [SerializeField] GameObject stageSelectButton;
@@ -27,6 +28,6 @@ public class TitleUI : MonoBehaviour
         audioSource.PlayOneShot(audioSource.clip);
         yield return new WaitForSeconds(0.5f);
         // 音が鳴ってから
-        SceneManager.LoadScene("Select_Scene");
+        SceneManager.LoadScene("StageSelect");
     }
 }
