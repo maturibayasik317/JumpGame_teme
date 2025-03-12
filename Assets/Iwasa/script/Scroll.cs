@@ -9,6 +9,7 @@ public class Scroll : MonoBehaviour
 
     Vector3  Startpos;
     Jump_Dash playerScript;
+    float elapsedTime = 0;
 
     private void Start()
     {
@@ -19,7 +20,13 @@ public class Scroll : MonoBehaviour
 
     void Update()
     {
-        if (playerScript.GetIsClear || playerScript.GetIsDead) return;
+        const float time = 2.0f;
+        if (playerScript.GetIsDead || elapsedTime > time) return;
+
+        if (playerScript.GetIsClear)
+        {
+            elapsedTime += Time.deltaTime;
+        }
 
         //背景もしくはグラウンドにコンポーネントしといて、Serializeで設定したからスピードの設定も忘れずに
         transform.position -= new Vector3(Time.deltaTime * speed, Startpos.y);

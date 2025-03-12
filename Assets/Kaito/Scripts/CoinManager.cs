@@ -286,7 +286,7 @@ public class CoinManager : MonoBehaviour
     {
         coinNumText.text = $"ƒRƒCƒ“F {coinScript.GetPlayerCoinNums(stageNum)} / {stageCoins.Length}";
 
-        for (int num = stageNum - 1; num < stageCoins.Length; num++)
+        for (int num = 0; num < stageCoins.Length; num++)
         {
             if (coinImages[num] != null) return;
 

@@ -15,7 +15,7 @@ public class BreakWall : MonoBehaviour
         playerScript = GameObject.Find("Player").GetComponent<Jump_Dash>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         // ダッシュ状態のプレイヤーが当たったら
         if (collision.gameObject.CompareTag("Player") && playerScript.GetDash)

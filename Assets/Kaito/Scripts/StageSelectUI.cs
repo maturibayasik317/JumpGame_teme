@@ -10,7 +10,8 @@ public class StageSelectUI : MonoBehaviour
 {
     const int IMAGE_NUM = 12;
 
-    [SerializeField] Sprite coinSprite;
+    [SerializeField] Sprite coinSprite; // コイン画像
+    Sprite startSprite;                 // コイン画像が入る前のリング画像
     [SerializeField] Image[] coinImages = new Image[IMAGE_NUM];
 
     // ボタンの種類（どのステージに対応しているか）
@@ -45,6 +46,7 @@ public class StageSelectUI : MonoBehaviour
             Image image = GameObject.Find("CoinImage_" + num).GetComponent<Image>();
             coinImages[num] = image;
         }
+        startSprite = coinImages[0].sprite;
     }
 
     void Start()
@@ -78,9 +80,11 @@ public class StageSelectUI : MonoBehaviour
         {
             for (int cNum = 0; cNum < GlobalConst.MAX_COIN_NUM; cNum++)
             {
+                if (coinManagerScript.GetPlayerHaveCoins(sNum, cNum))
+                {
+                    coinImages[imageIdx].sprite = coinSprite;
+                }
                 imageIdx++;
-                if (!coinManagerScript.GetPlayerHaveCoins(sNum, cNum)) return;
-                coinImages[imageIdx].sprite = coinSprite;
             }
         }
     }
@@ -131,6 +135,10 @@ public class StageSelectUI : MonoBehaviour
         // 取得状態をリセット
         coinScript.ResetPlayerCoinNums();
         coinManagerScript.ResetPlayerHaveCoins(GlobalConst.MAX_STAGE_NUM);
+        for (int num = 0; num < IMAGE_NUM; num++)
+        {
+            coinImages[num].sprite = startSprite;
+        }
     }
 
     /* 各ボタンを押したら呼ばれる関数*/

@@ -6,7 +6,9 @@ public class CamerContorller : MonoBehaviour
 {
     //カメラにaddしてください
     //addしたらプレイヤーの下に入れてください
-    float y = 0.0f;
+    Vector3 offset = new Vector3(7.5f, 0, 0);
+    float y = 0;
+    float z = 0;
     [SerializeField] GameObject player;
     Jump_Dash playerScript;
 
@@ -15,6 +17,7 @@ public class CamerContorller : MonoBehaviour
     {
         playerScript = player.GetComponent<Jump_Dash>();
         y = transform.position.y;
+        z = transform.position.z;
     }
 
     // Update is called once per frame
@@ -22,7 +25,7 @@ public class CamerContorller : MonoBehaviour
     {
         if (playerScript.GetIsDead) return;
         float x = player.transform.position.x;
-        transform.position = new Vector3(x, transform.position.y, transform.position.z);
+        transform.position = offset + new Vector3(x, y, z);
 
     }
 }
