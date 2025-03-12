@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-//----動く床（修正中）----
+/// <summary>
+/// 動く床クラス
+/// </summary>
 public class MovingFloor : MonoBehaviour
 {
     [SerializeField] SpriteRenderer sr;
@@ -16,11 +16,14 @@ public class MovingFloor : MonoBehaviour
 
     Vector2 oldPos = Vector2.zero; // 直前の位置を取得
     Vector2 velocity = Vector2.zero;
-    Vector2 playerVelocity = Vector2.zero; // プレイヤーに加算する速度
+    Vector2 addPlayerVelocity = Vector2.zero; // プレイヤーに加算する速度
     float elapsedTime = 0; // 時間計測用
 
-    // 読み取り専用プロパティ
-    public Vector2 GetVelocity => playerVelocity;
+    /// <summary>
+    /// プレイヤーに加算する速度を返す関数
+    /// </summary>
+    /// <returns></returns>
+    public Vector2 GetVelocity() { return addPlayerVelocity; }
 
     void Start()
     {
@@ -35,7 +38,9 @@ public class MovingFloor : MonoBehaviour
         }
     }
 
-    // 床を動かす
+    /// <summary>
+    /// 床を動かす関数
+    /// </summary>
     void Move()
     {
         elapsedTime += Time.deltaTime; // 経過時間
@@ -55,7 +60,7 @@ public class MovingFloor : MonoBehaviour
             }
 
             // 進んだ距離を出し、時間で割る
-            playerVelocity.x = (transform.position.x - oldPos.x) / Time.deltaTime;
+            addPlayerVelocity.x = (transform.position.x - oldPos.x) / Time.deltaTime;
             oldPos.x = transform.position.x; // 直前の床の位置を保存
         }
 
@@ -73,7 +78,7 @@ public class MovingFloor : MonoBehaviour
                 elapsedTime = 0;
             }
 
-            playerVelocity.y = (transform.position.y - oldPos.y) / Time.deltaTime;
+            addPlayerVelocity.y = (transform.position.y - oldPos.y) / Time.deltaTime;
             oldPos.y = transform.position.y;
         }
     }

@@ -7,18 +7,22 @@ public class CamerContorller : MonoBehaviour
     //カメラにaddしてください
     //addしたらプレイヤーの下に入れてください
     float y = 0.0f;
+    [SerializeField] GameObject player;
+    Jump_Dash playerScript;
+
     // Start is called before the first frame update
     void Start()
     {
+        playerScript = player.GetComponent<Jump_Dash>();
         y = transform.position.y;
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        Vector3 pos = transform.position;
-        pos.y = y;
-        transform.position = pos; 
+        if (playerScript.GetIsDead) return;
+        float x = player.transform.position.x;
+        transform.position = new Vector3(x, transform.position.y, transform.position.z);
 
     }
 }

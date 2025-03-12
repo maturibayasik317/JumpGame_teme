@@ -1,16 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-//----ゲームシーンのコイン管理----
-public class CoinManager : SingletonMonoBehaviour<CoinManager>
+/// <summary>
+/// 複数のクラスで使用する定数を定義したクラス
+/// </summary>
+public static class GlobalConst
 {
-    //-----シングルトン用-----
-    protected override bool dontDestroyOnLoad { get { return true; } }
-    static CoinManager instance;
-    //------------------------
+    public const int MAX_STAGE_NUM = 4; // ステージの最大数
+    public const int MAX_COIN_NUM = 3;  // コインの最大枚数
+}
+
+/// <summary>
+/// 各ステージのコイン状況を管理するクラス
+/// </summary>
+public class CoinManager : MonoBehaviour
+{
+    // シングルトン用
+    static CoinManager instance = null;
 
     [SerializeField] GameObject[] stageCoins; // ステージ上に配置するコイン
     [SerializeField] Sprite coinSprite; // コイン画像
@@ -22,13 +29,44 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
 
     Coin coinScript;
 
-    // ステージ毎に、プレイヤーがコインを保持しているか確認
+    // ステージ毎に、プレイヤーがコインを保持しているか確認：削除予定
     bool[] isPlayerCoin_Stage1 = new bool[3] {false, false, false};
     bool[] isPlayerCoin_Stage2 = new bool[3] {false, false, false};
     bool[] isPlayerCoin_Stage3 = new bool[3] {false, false, false};
     bool[] isPlayerCoin_Stage4 = new bool[3] {false, false, false};
 
-    // プロパティ
+    // ステージごとに、プレイヤーが各コインを保持しているかどうか
+    bool[,] playerHaveCoins = new bool[GlobalConst.MAX_STAGE_NUM, GlobalConst.MAX_COIN_NUM] {
+        { false, false, false },
+        { false, false, false },
+        { false, false, false },
+        { false, false, false }
+    };
+
+    /// <summary>
+    /// プレイヤーが取得しているコインの情報を返す関数
+    /// </summary>
+    /// <param name="_stageNum">ステージ番号</param>
+    /// <param name="_coinNum">コイン番号</param>
+    /// <returns></returns>
+    public bool GetPlayerHaveCoins(int _stageNum, int _coinNum) { return playerHaveCoins[_stageNum, _coinNum]; }
+
+    /// <summary>
+    /// プレイヤーが取得しているコインの情報をリセットする関数
+    /// </summary>
+    /// <param name="_stageNum">ステージ番号</param>
+    public void ResetPlayerHaveCoins(int _stageNum)
+    {
+        for (int sNum = 0; sNum < _stageNum; sNum++)
+        {
+            for (int cNum = 0; cNum < stageCoins.Length; cNum++)
+            {
+                playerHaveCoins[sNum , cNum] = false;
+            }
+        }
+    }
+
+    // プロパティ：削除予定
     public bool[] IsPlayerCoin_Stage1
     {
         get { return isPlayerCoin_Stage1; }
@@ -54,7 +92,7 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
     // * <注意点> 「BuildSetting」の番号と同じにする
     public enum GameSceneType
     {
-        Title_Scene = 0,
+        TITLE = 0,
         STAGE_SELECT,
         STAGE_1,
         STAGE_2,
@@ -62,16 +100,22 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
         STAGE_4
     }
     public GameSceneType gameSceneType;
-    int currentScene = 0; // 現在いるシーン
+    int currentScene = 0; // 現在いるシーン:後で削除
+    int stageNum = 0; // 現在いるステージ
+    /// <summary>
+    /// ステージ番号を返す関数
+    /// </summary>
+    /// <returns>現在のステージ番号</returns>
+    public int GetStageNum() { return stageNum; }
 
     void Awake()
     {
-        CheckInstance(); // シングルトン
+        CheckInstance();
     }
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject); // シーンが変わっても存在する
+        DontDestroyOnLoad(gameObject);
         coinScript = coinPrefab.GetComponent<Coin>();
         
         // シーンのロードが完了すると検出されるイベント
@@ -81,6 +125,7 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
 
     void Update()
     {
+        #if false // 変更前
         // ステージごとにコイン枚数を取得
         switch (gameSceneType)
         {
@@ -101,11 +146,18 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
                 CoinUIStage_4();
                 break;
         }
+        #endif
+
+        // タイトル画面かステージ選択画面なら処理しない
+        if (gameSceneType == GameSceneType.TITLE || gameSceneType == GameSceneType.STAGE_SELECT) return;
         
+        CoinUI();
         ChangeSprite();
     }
 
-    // シングルトン
+    /// <summary>
+    /// シングルトン
+    /// </summary>
     void CheckInstance()
     {
         if (instance == null)
@@ -118,18 +170,73 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
         }
     }
 
-    // どのシーンにいるか
+    /// <summary>
+    /// 現在のシーンを取得する関数
+    /// </summary>
+    /// <param name="nextScene"></param>
+    /// <param name="mode"></param>
+    void SceneCheck(Scene nextScene, LoadSceneMode mode)
+    {
+        stageNum = 0; // ここで初期化しておく
+
+        switch (SceneManager.GetActiveScene().buildIndex)
+        {
+            // タイトル画面
+            case (int)GameSceneType.TITLE:
+                gameSceneType = GameSceneType.TITLE;
+                break;
+            // ステージ選択画面
+            case (int)GameSceneType.STAGE_SELECT:
+                gameSceneType = GameSceneType.STAGE_SELECT;
+                break;
+            // ステージ1
+            case (int)GameSceneType.STAGE_1:
+                gameSceneType = GameSceneType.STAGE_1;
+                stageNum = 1;
+                break;
+            // ステージ2
+            case (int)GameSceneType.STAGE_2:
+                gameSceneType = GameSceneType.STAGE_2;
+                stageNum = 2;
+                break;
+            // ステージ3
+            case (int)GameSceneType.STAGE_3:
+                gameSceneType = GameSceneType.STAGE_3;
+                stageNum = 3;
+                break;
+            // ステージ4
+            case (int)GameSceneType.STAGE_4:
+                gameSceneType = GameSceneType.STAGE_4;
+                stageNum = 4;
+                break;
+        }
+
+        // タイトル画面とステージ選択画面以外で
+        if (gameSceneType != GameSceneType.TITLE
+            && gameSceneType != GameSceneType.STAGE_SELECT)
+        {
+            // (DontDestroyOnLoadのケア)
+            // コインテキストが参照されていないとき
+            coinNumText = GameObject.Find("CoinNumText").GetComponent<Text>();
+        }
+    }
+
+#if false // 変更前
+    /// <summary>
+    /// 現在のシーンを取得する関数
+    /// </summary>
+    /// <param name="nextScene"></param>
+    /// <param name="mode"></param>
     void SceneCheck(Scene nextScene, LoadSceneMode mode)
     {
         // 現在のシーン番号を取得
         currentScene = SceneManager.GetActiveScene().buildIndex;
-        Debug.Log($"シーン番号：{currentScene}");
 
         switch (currentScene)
         {
             // タイトル画面
-            case (int)GameSceneType.Title_Scene:
-                gameSceneType = GameSceneType.Title_Scene;
+            case (int)GameSceneType.TITLE:
+                gameSceneType = GameSceneType.TITLE;
                 Debug.Log($"シーンタイプ：{gameSceneType}");
                 break;
             // ステージ選択画面
@@ -160,7 +267,7 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
         }
 
         // タイトル画面とステージ選択画面以外で
-        if (gameSceneType != GameSceneType.Title_Scene
+        if (gameSceneType != GameSceneType.TITLE
             && gameSceneType != GameSceneType.STAGE_SELECT)
         {
             // (DontDestroyOnLoadのケア)
@@ -168,8 +275,36 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
             coinNumText = GameObject.Find("CoinNumText").GetComponent<Text>();
         }
     }
+#endif
 
     //-----ステージ毎のコイン関連のUIの処理-----
+
+    /// <summary>
+    /// ステージに配置するコインを設定する関数
+    /// </summary>
+    void CoinUI()
+    {
+        coinNumText.text = $"コイン： {coinScript.GetPlayerCoinNums(stageNum)} / {stageCoins.Length}";
+
+        for (int num = stageNum - 1; num < stageCoins.Length; num++)
+        {
+            if (coinImages[num] != null) return;
+
+            coinImages[num] = GameObject.Find("CoinImage_" + num).GetComponent<Image>();
+        }
+        
+        for (int num = 0; num < stageCoins.Length; num++)
+        {
+            if (stageCoins[num] != null) return;
+
+            // コインを参照
+            stageCoins[num] = GameObject.Find("Coin_" + num);
+            if (playerHaveCoins[stageNum - 1, num]) // 既に取得済みのコインは消す
+            {
+                Destroy(stageCoins[num]);
+            }
+        }
+    }
     
     void CoinUIStage_1() // ステージ1
     {
@@ -177,19 +312,12 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
         coinNumText.text = $"コイン : {coinScript.PlayerCoin_Stage1} / {stageCoins.Length}";
 
         // (DontDestroyOnLoadのケア)
-        // コインの画像状態がnullになったら
-        if (coinImages[0] == null)
+        for (int i = 0; i < coinImages.Length; i++)
         {
-            // コイン画像状態を取得
-            coinImages[0] = GameObject.Find("CoinImage").GetComponent<Image>();
-        }
-        if (coinImages[1] == null)
-        {
-            coinImages[1] = GameObject.Find("CoinImage (1)").GetComponent<Image>();
-        }
-        if (coinImages[2] == null)
-        {
-            coinImages[2] = GameObject.Find("CoinImage (2)").GetComponent<Image>();
+            if (coinImages[i] == null)
+            {
+                coinImages[i] = GameObject.Find("CoinImage_" + i).GetComponent<Image>();
+            }
         }
         
         // (DontDestroyOnLoadのケア)
@@ -330,87 +458,107 @@ public class CoinManager : SingletonMonoBehaviour<CoinManager>
 
     //------------------------------------------
 
-    // コイン画像に変更する
+    /// <summary>
+    /// 各ステージのコインUI画像を変更する関数
+    /// </summary>
     void ChangeSprite()
     {
-        // タイトル画面とステージ選択画面以外で
-        if (gameSceneType != GameSceneType.Title_Scene 
-            && gameSceneType != GameSceneType.STAGE_SELECT)
+        // ステージごとのコインの状態をチェック
+        for (int num = 0; num < stageCoins.Length; num++)
         {
-        //--------ステージ毎のコインの状態をチェック--------
-
-            // ステージ1
-            if(gameSceneType == GameSceneType.STAGE_1)
+            // ステージに設置したコインが無くなったら
+            if (!stageCoins[num])
             {
-                for (int i = 0; i < isPlayerCoin_Stage1.Length; i++)
-                {
-                    // ステージに設置したコインが無くなったら
-                    if (!stageCoins[i])
-                    {
-                        isPlayerCoin_Stage1[i] = true;
-                    }
-                    // コインが取得されたら
-                    if (isPlayerCoin_Stage1[i])
-                    {
-                        coinImages[i].sprite = coinSprite;
-                    }
-                }
+                playerHaveCoins[stageNum - 1, num] = true;
             }
-
-            // ステージ2
-            if (gameSceneType == GameSceneType.STAGE_2)
+            // コインが取得されたら
+            if (playerHaveCoins[stageNum - 1, num])
             {
-                for (int i = 0; i < isPlayerCoin_Stage2.Length; i++)
-                {
-                    // ステージに設置したコインが無くなったら
-                    if (!stageCoins[i])
-                    {
-                        isPlayerCoin_Stage2[i] = true;
-                    }
-                    // コインが取得されたら
-                    if (isPlayerCoin_Stage2[i])
-                    {
-                        coinImages[i].sprite = coinSprite;
-                    }
-                }
+                coinImages[num].sprite = coinSprite;
             }
-
-            // ステージ3
-            if (gameSceneType == GameSceneType.STAGE_3)
-            {
-                for (int i = 0; i < isPlayerCoin_Stage3.Length; i++)
-                {
-                    // ステージに設置したコインが無くなったら
-                    if (!stageCoins[i])
-                    {
-                        isPlayerCoin_Stage3[i] = true;
-                    }
-                    // コインが取得されたら
-                    if (isPlayerCoin_Stage3[i])
-                    {
-                        coinImages[i].sprite = coinSprite;
-                    }
-                }
-            }
-
-            // ステージ4
-            if (gameSceneType == GameSceneType.STAGE_4)
-            {
-                for (int i = 0; i < isPlayerCoin_Stage4.Length; i++)
-                {
-                    // ステージに設置したコインが無くなったら
-                    if (!stageCoins[i])
-                    {
-                        isPlayerCoin_Stage4[i] = true;
-                    }
-                    // コインが取得されたら
-                    if (isPlayerCoin_Stage4[i])
-                    {
-                        coinImages[i].sprite = coinSprite;
-                    }
-                }
-            }
-        //--------------------------------------------------
         }
     }
+
+#if false // 変更前
+    /// <summary>
+    /// コイン画像に変更する関数
+    /// </summary>
+    void ChangeSprite()
+    {
+        //--------ステージ毎のコインの状態をチェック--------
+
+        // ステージ1
+        if(gameSceneType == GameSceneType.STAGE_1)
+        {
+            for (int i = 0; i < isPlayerCoin_Stage1.Length; i++)
+            {
+                // ステージに設置したコインが無くなったら
+                if (!stageCoins[i])
+                {
+                    isPlayerCoin_Stage1[i] = true;
+                }
+                // コインが取得されたら
+                if (isPlayerCoin_Stage1[i])
+                {
+                    coinImages[i].sprite = coinSprite;
+                }
+            }
+        }
+
+        // ステージ2
+        if (gameSceneType == GameSceneType.STAGE_2)
+        {
+            for (int i = 0; i < isPlayerCoin_Stage2.Length; i++)
+            {
+                // ステージに設置したコインが無くなったら
+                if (!stageCoins[i])
+                {
+                    isPlayerCoin_Stage2[i] = true;
+                }
+                // コインが取得されたら
+                if (isPlayerCoin_Stage2[i])
+                {
+                    coinImages[i].sprite = coinSprite;
+                }
+            }
+        }
+
+        // ステージ3
+        if (gameSceneType == GameSceneType.STAGE_3)
+        {
+            for (int i = 0; i < isPlayerCoin_Stage3.Length; i++)
+            {
+                // ステージに設置したコインが無くなったら
+                if (!stageCoins[i])
+                {
+                    isPlayerCoin_Stage3[i] = true;
+                }
+                // コインが取得されたら
+                if (isPlayerCoin_Stage3[i])
+                {
+                    coinImages[i].sprite = coinSprite;
+                }
+            }
+        }
+
+        // ステージ4
+        if (gameSceneType == GameSceneType.STAGE_4)
+        {
+            for (int i = 0; i < isPlayerCoin_Stage4.Length; i++)
+            {
+                // ステージに設置したコインが無くなったら
+                if (!stageCoins[i])
+                {
+                    isPlayerCoin_Stage4[i] = true;
+                }
+                // コインが取得されたら
+                if (isPlayerCoin_Stage4[i])
+                {
+                    coinImages[i].sprite = coinSprite;
+                }
+            }
+        }
+    //--------------------------------------------------
+    }
+#endif
 }

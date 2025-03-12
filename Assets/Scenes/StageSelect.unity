@@ -350,7 +350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
       propertyPath: coinImages.Array.size
-      value: 12
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2404521996002828646, guid: de2dd35d063c5e749aa8140dc9c7b85c, type: 3}
       propertyPath: coinImages.Array.data[0]
@@ -674,7 +674,7 @@ GameObject:
   - component: {fileID: 1994764780}
   - component: {fileID: 1994764779}
   m_Layer: 0
-  m_Name: Title_Select_Backgoround
+  m_Name: Backgoround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -844,6 +844,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5565515263499532558, guid: f018ccacdb4c8e54eb9201f357214990, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5574466137627399170, guid: f018ccacdb4c8e54eb9201f357214990, type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6355278347509471931, guid: f018ccacdb4c8e54eb9201f357214990, type: 3}

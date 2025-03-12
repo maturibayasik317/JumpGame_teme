@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-//----ダッシュで壊せる壁のスクリプト----
-// パーティクルシステムのインスペクター上の「duration」から
-// 壁が壊れるまでの時間を設定
+/// <summary>
+/// ダッシュで壊せる壁のアニメーションなどを行うクラス
+/// </summary>
 public class BreakWall : MonoBehaviour
 {
     [SerializeField] ParticleSystem particle;
@@ -26,7 +25,10 @@ public class BreakWall : MonoBehaviour
         }
     }
 
-    // 壁が壊れる処理
+    /// <summary>
+    /// 壁が壊れる処理を行う関数
+    /// </summary>
+    /// <returns></returns>
     IEnumerator WallDestroy()
     {
         particle.Play();

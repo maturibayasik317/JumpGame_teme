@@ -1,8 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-//----ダッシュ時のエフェクト----
+/// <summary>
+/// ダッシュ時のエフェクトを発生させるクラス
+/// </summary>
 public class DashEffect : MonoBehaviour
 {
     [SerializeField] ParticleSystem particle;
@@ -22,7 +23,10 @@ public class DashEffect : MonoBehaviour
         StartCoroutine(DashParticle());
     }
 
-    // パーティクルの処理
+    /// <summary>
+    /// パーティクルの処理を行う関数
+    /// </summary>
+    /// <returns></returns>
     IEnumerator DashParticle()
     {
         if (playerScript.GetDash)
@@ -30,7 +34,6 @@ public class DashEffect : MonoBehaviour
             // ダッシュエフェクト発生
             particle.Play();
             yield return new WaitForSeconds(dashDuration);
-            // dashDuration秒後くらいにエフェクトをストップ
             particle.Stop();
         }
     }

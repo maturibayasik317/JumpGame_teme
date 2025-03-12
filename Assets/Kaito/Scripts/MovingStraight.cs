@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-//----真っ直ぐ飛んでくるオブジェクトのスクリプト----
+/// <summary>
+/// 一直線に飛んでくる障害物のクラス
+/// </summary>
 public class MovingStraight : MonoBehaviour
 {
     [SerializeField] float speed; // 移動速度

@@ -17,7 +17,6 @@ public class MainGameUI : MonoBehaviour
     [SerializeField] GameObject titleButton; // タイトルボタン
 
     [SerializeField] GameObject player;
-    [SerializeField] ParticleSystem clearParticle;
     [SerializeField] float effectTime;
 
     Jump_Dash playerScript;
@@ -68,7 +67,6 @@ public class MainGameUI : MonoBehaviour
         StartCoroutine(SceneChange_Title());
     }
 
-    // テキスト、ボタン関連の表示・非表示
     /// <summary>
     /// テキスト、ボタンの表示・非表示を行う関数
     /// </summary>
@@ -87,23 +85,6 @@ public class MainGameUI : MonoBehaviour
             selectButton.SetActive(true);
             gameClearImage.SetActive(true);
             titleButton.SetActive(true);
-
-            StartCoroutine(ClearEffect());
-        }
-    }
-
-    /// <summary>
-    /// クリア演出を行う関数
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator ClearEffect()
-    {
-        if (clearParticle != null) // 参照エラー回避
-        {
-            clearParticle.Play();
-            float stopTime = clearParticle.main.duration + effectTime;
-            yield return new WaitForSeconds(stopTime);
-            Destroy(clearParticle);
         }
     }
 
@@ -113,11 +94,9 @@ public class MainGameUI : MonoBehaviour
     /// <returns></returns>
     IEnumerator SceneRetry()
     {
-        Debug.Log(retryAudioSource);
         retryAudioSource.PlayOneShot(retryAudioSource.clip);
         yield return new WaitForSeconds(WAIT_TIME);
-        // 音が鳴ってから
-        // 現在のシーンを再読み込み
+        // 音が鳴ってから現在のシーンを再読み込み
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

@@ -18,6 +18,8 @@ public class Jump_Dash : MonoBehaviour
     public GameObject text;
     bool isClear = false;
     public bool GetIsClear => isClear;
+    bool isDead = false;
+    public bool GetIsDead => isDead;
 
     public AudioSource jumpAudioSource;//ジャンプの音
     public AudioSource dashAudioSource;//ダッシュの音
@@ -159,7 +161,7 @@ public class Jump_Dash : MonoBehaviour
         //動く床が参照されている時
         if(floorScript != null)
         {
-            addVelocity = new Vector2(floorScript.GetVelocity.x, floorScript.GetVelocity.y);
+            addVelocity = new Vector2(floorScript.GetVelocity().x, floorScript.GetVelocity().y);
             //動く床の上でジャンプしてないとき
             if(!jumpDuring)
             {
@@ -181,10 +183,11 @@ public class Jump_Dash : MonoBehaviour
         //HitBoxもしくはEnemyに触れるとプレイヤーの破壊
         if(other.gameObject.tag == "HitBox" || other.gameObject.tag == "Enemy ")
         {
+            isDead = true;
             //プレイヤーを消去
             Destroy(this.gameObject);
             //IwasaのところにPrefabとしてゲームオーバーテキストお用意したのでInspecterに入れてください
-            text.SetActive(true);
+            //text.SetActive(true);
             Debug.Log("ご臨終");
         }
 
