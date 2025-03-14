@@ -91,6 +91,8 @@ public class Jump_Dash : MonoBehaviour
     }
     private void Update()
     {
+        if (isClear) return;
+
         dashElapsedTime += Time.deltaTime; // フレームごとに経過時間を更新
         //スペースでジャンプ
         if (Input.GetKeyDown (KeyCode.Space))
