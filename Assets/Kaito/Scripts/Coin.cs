@@ -1,7 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-//----コインの動き等----
+/// <summary>
+/// コインの動きや取得した数をカウントしておくクラス
+/// </summary>
 public class Coin : MonoBehaviour
 {
     [SerializeField] float angle; // 何度ずつ回転させるか
@@ -58,9 +60,7 @@ public class Coin : MonoBehaviour
         set { getCoin_Stage4 = value; }
     }
 
-    // コイン取得時の効果音用
-    AudioSource audioSource;
-
+    AudioSource audioSource; // コイン取得時の効果音用
     CoinManager coinManagerScript;
 
     void Start()

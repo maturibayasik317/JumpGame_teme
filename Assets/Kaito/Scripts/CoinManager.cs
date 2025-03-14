@@ -100,7 +100,6 @@ public class CoinManager : MonoBehaviour
         STAGE_4
     }
     public GameSceneType gameSceneType;
-    int currentScene = 0; // 現在いるシーン:後で削除
     int stageNum = 0; // 現在いるステージ
     /// <summary>
     /// ステージ番号を返す関数
@@ -220,64 +219,6 @@ public class CoinManager : MonoBehaviour
             coinNumText = GameObject.Find("CoinNumText").GetComponent<Text>();
         }
     }
-
-#if false // 変更前
-    /// <summary>
-    /// 現在のシーンを取得する関数
-    /// </summary>
-    /// <param name="nextScene"></param>
-    /// <param name="mode"></param>
-    void SceneCheck(Scene nextScene, LoadSceneMode mode)
-    {
-        // 現在のシーン番号を取得
-        currentScene = SceneManager.GetActiveScene().buildIndex;
-
-        switch (currentScene)
-        {
-            // タイトル画面
-            case (int)GameSceneType.TITLE:
-                gameSceneType = GameSceneType.TITLE;
-                Debug.Log($"シーンタイプ：{gameSceneType}");
-                break;
-            // ステージ選択画面
-            case (int)GameSceneType.STAGE_SELECT:
-                gameSceneType = GameSceneType.STAGE_SELECT;
-                Debug.Log($"シーンタイプ：{gameSceneType}");
-                break;
-            // ステージ1
-            case (int)GameSceneType.STAGE_1:
-                gameSceneType = GameSceneType.STAGE_1;
-                Debug.Log($"シーンタイプ：{gameSceneType}");
-                break;
-            // ステージ2
-            case (int)GameSceneType.STAGE_2:
-                gameSceneType = GameSceneType.STAGE_2;
-                Debug.Log($"シーンタイプ：{gameSceneType}");
-                break;
-            // ステージ3
-            case (int)GameSceneType.STAGE_3:
-                gameSceneType = GameSceneType.STAGE_3;
-                Debug.Log($"シーンタイプ：{gameSceneType}");
-                break;
-            // ステージ4
-            case (int)GameSceneType.STAGE_4:
-                gameSceneType = GameSceneType.STAGE_4;
-                Debug.Log($"シーンタイプ：{gameSceneType}");
-                break;
-        }
-
-        // タイトル画面とステージ選択画面以外で
-        if (gameSceneType != GameSceneType.TITLE
-            && gameSceneType != GameSceneType.STAGE_SELECT)
-        {
-            // (DontDestroyOnLoadのケア)
-            // コインテキストが参照されていないとき
-            coinNumText = GameObject.Find("CoinNumText").GetComponent<Text>();
-        }
-    }
-#endif
-
-    //-----ステージ毎のコイン関連のUIの処理-----
 
     /// <summary>
     /// ステージに配置するコインを設定する関数
@@ -455,8 +396,6 @@ public class CoinManager : MonoBehaviour
             }
         }
     }
-
-    //------------------------------------------
 
     /// <summary>
     /// 各ステージのコインUI画像を変更する関数
