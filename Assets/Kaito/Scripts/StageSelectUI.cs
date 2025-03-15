@@ -97,31 +97,25 @@ public class StageSelectUI : MonoBehaviour
     {
         const float WAIT_TIME = 0.5f;
 
+        audioSource.PlayOneShot(audioSource.clip);
+        // ‰¹‚ª–Â‚Á‚Ä‚©‚ç
+        yield return new WaitForSeconds(WAIT_TIME);
+        
         switch (_buttonType)
         {
             case ButtonType.STAGE_1:
-                audioSource.PlayOneShot(audioSource.clip);
-                yield return new WaitForSeconds(WAIT_TIME);
-                // ‰¹‚ª–Â‚Á‚Ä‚©‚ç
                 SceneManager.LoadScene("Stage_1");
                 break;
             case ButtonType.STAGE_2:
-                audioSource.PlayOneShot(audioSource.clip);
-                yield return new WaitForSeconds(WAIT_TIME);
                 SceneManager.LoadScene("Stage_2");
                 break;
             case ButtonType.STAGE_3:
-                audioSource.PlayOneShot(audioSource.clip);
-                yield return new WaitForSeconds(WAIT_TIME);
                 SceneManager.LoadScene("Stage_3");
                 break;
             case ButtonType.STAGE_4:
-                audioSource.PlayOneShot(audioSource.clip);
-                yield return new WaitForSeconds(WAIT_TIME);
                 SceneManager.LoadScene("Stage_4");
                 break;
             case ButtonType.COINRESET:
-                audioSource.PlayOneShot(audioSource.clip);
                 CoinReset();
                 break;
         }
