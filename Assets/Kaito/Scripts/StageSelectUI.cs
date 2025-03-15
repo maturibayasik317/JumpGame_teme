@@ -51,7 +51,7 @@ public class StageSelectUI : MonoBehaviour
 
     void Start()
     {
-        #if false // 変更前
+#if false // 変更前
         // ステージ1
         for (int i = 0; i < coinManagerScript.IsPlayerCoin_Stage1.Length; i++)
         {
@@ -72,7 +72,7 @@ public class StageSelectUI : MonoBehaviour
         {
             if (coinManagerScript.IsPlayerCoin_Stage4[i]) coinImages[i + 9].sprite = coinSprite;
         }
-        #endif
+#endif
 
         int imageIdx = 0;
         // 各ステージのコイン取得状況を調べ、取得済みなら画像をコインに変更

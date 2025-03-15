@@ -18,13 +18,14 @@ public class Coin : MonoBehaviour
     static int getCoin_Stage3 = 0;
     static int getCoin_Stage4 = 0;
 
+    // プレイヤーが取得したコインの数
     static int[] playerCoinNums = new int[GlobalConst.MAX_STAGE_NUM];
 
     /// <summary>
     /// プレイヤーがステージごとに取得したコイン枚数を返す関数
     /// </summary>
     /// <param name="_stageNum">ステージ番号</param>
-    /// <returns></returns>
+    /// <returns>引数で指定したステージのコイン取得枚数</returns>
     public int GetPlayerCoinNums(int _stageNum) { return playerCoinNums[_stageNum - 1];}
    
     /// <summary>
@@ -111,13 +112,7 @@ public class Coin : MonoBehaviour
 
         yield return new WaitForSeconds(0.8f);
 
-        // コイン枚数が最大値を超えていたら呼ばないようにする
-        if (playerCoinNums[coinManagerScript.GetStageNum() - 1] < GlobalConst.MAX_COIN_NUM)
-        {
-            playerCoinNums[coinManagerScript.GetStageNum() - 1]++;
-        }
-
-        #if false // 変更前
+#if false // 変更前
         // ステージ1
         if (coinManagerScript.gameSceneType == CoinManager.GameSceneType.STAGE_1)
         {
@@ -138,7 +133,13 @@ public class Coin : MonoBehaviour
         {
             getCoin_Stage4 += 1;
         }
-        #endif
+#endif
+
+        // コイン枚数が最大値を超えていたら呼ばないようにする
+        if (playerCoinNums[coinManagerScript.GetStageNum() - 1] < GlobalConst.MAX_COIN_NUM)
+        {
+            playerCoinNums[coinManagerScript.GetStageNum() - 1]++;
+        }
         Destroy(gameObject);
     }
 }

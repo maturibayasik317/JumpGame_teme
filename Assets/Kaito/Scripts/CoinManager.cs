@@ -48,7 +48,7 @@ public class CoinManager : MonoBehaviour
     /// </summary>
     /// <param name="_stageNum">ステージ番号</param>
     /// <param name="_coinNum">コイン番号</param>
-    /// <returns></returns>
+    /// <returns>引数で指定した、nステージ目のn枚目のコインを取得していればtrue</returns>
     public bool GetPlayerHaveCoins(int _stageNum, int _coinNum) { return playerHaveCoins[_stageNum, _coinNum]; }
 
     /// <summary>
@@ -246,6 +246,8 @@ public class CoinManager : MonoBehaviour
             }
         }
     }
+
+    /*↓-----------------------------変更前-----------------------------↓*/
     
     void CoinUIStage_1() // ステージ1
     {
@@ -396,6 +398,8 @@ public class CoinManager : MonoBehaviour
             }
         }
     }
+    
+    /*↑-----------------------------変更前-----------------------------↑*/
 
     /// <summary>
     /// 各ステージのコインUI画像を変更する関数
@@ -497,7 +501,6 @@ public class CoinManager : MonoBehaviour
                 }
             }
         }
-    //--------------------------------------------------
     }
 #endif
 }
