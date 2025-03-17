@@ -51,29 +51,6 @@ public class StageSelectUI : MonoBehaviour
 
     void Start()
     {
-#if false // 変更前
-        // ステージ1
-        for (int i = 0; i < coinManagerScript.IsPlayerCoin_Stage1.Length; i++)
-        {
-            if (coinManagerScript.IsPlayerCoin_Stage1[i]) coinImages[i].sprite = coinSprite;
-        }
-        // ステージ2
-        for (int i = 0; i < coinManagerScript.IsPlayerCoin_Stage2.Length; i++)
-        {
-            if (coinManagerScript.IsPlayerCoin_Stage2[i]) coinImages[i + 3].sprite = coinSprite;
-        }
-        // ステージ3
-        for (int i = 0; i < coinManagerScript.IsPlayerCoin_Stage3.Length; i++)
-        {
-            if (coinManagerScript.IsPlayerCoin_Stage3[i]) coinImages[i + 6].sprite = coinSprite;
-        }
-        // ステージ4
-        for (int i = 0; i < coinManagerScript.IsPlayerCoin_Stage4.Length; i++)
-        {
-            if (coinManagerScript.IsPlayerCoin_Stage4[i]) coinImages[i + 9].sprite = coinSprite;
-        }
-#endif
-
         int imageIdx = 0;
         // 各ステージのコイン取得状況を調べ、取得済みなら画像をコインに変更
         for (int sNum = 0; sNum < GlobalConst.MAX_STAGE_NUM; sNum++)
@@ -156,36 +133,4 @@ public class StageSelectUI : MonoBehaviour
     {
         StartCoroutine(Button(ButtonType.STAGE_4));
     }
-
-#if false // 変更前
-    /// <summary>
-    /// 全ステージのコイン枚数をリセットする関数
-    /// </summary>
-    void CoinReset()
-    {
-        coinScript.PlayerCoin_Stage1 = 0;
-        coinScript.PlayerCoin_Stage2 = 0;
-        coinScript.PlayerCoin_Stage3 = 0;
-        coinScript.PlayerCoin_Stage4 = 0;
-
-        // 取得状態をリセット
-        for (int i = 0; i < coinManagerScript.IsPlayerCoin_Stage1.Length; i++)
-        {
-            coinManagerScript.IsPlayerCoin_Stage1[i] = false;
-        }
-        for (int i = 0; i < coinManagerScript.IsPlayerCoin_Stage2.Length; i++)
-        {
-            coinManagerScript.IsPlayerCoin_Stage2[i] = false;
-        }
-        for (int i = 0; i < coinManagerScript.IsPlayerCoin_Stage3.Length; i++)
-        {
-            coinManagerScript.IsPlayerCoin_Stage3[i] = false;
-        }
-        for (int i = 0; i < coinManagerScript.IsPlayerCoin_Stage4.Length; i++)
-        {
-            coinManagerScript.IsPlayerCoin_Stage4[i] = false;
-        }
-    }
-#endif
-
 }
